@@ -13,6 +13,20 @@ const paths = {
       <path d="M6 14l1.2.7 M9.5 11.5l.9 1.1 M14.5 11.5l-.9 1.1 M18 14l-1.2.7" />
     </>
   ),
+  gift: (
+    <>
+      <rect x="4" y="11" width="16" height="9" rx="1" />
+      <rect x="3" y="8" width="18" height="3" rx="1" />
+      <path d="M12 8v12 M12 8C10 3.5 6 4.5 7.5 8 M12 8c2-4.5 6-3.5 4.5 0" />
+    </>
+  ),
+  cards: (
+    <>
+      <rect x="4.5" y="6" width="10" height="14" rx="1.5" transform="rotate(-10 9.5 13)" />
+      <rect x="9.5" y="4" width="10" height="14" rx="1.5" transform="rotate(8 14.5 11)" />
+      <path d="M13.5 8.5l1 2 2 .3-1.5 1.4.4 2-1.9-1-1.8 1 .4-2-1.5-1.4 2-.3z" />
+    </>
+  ),
   chest: (
     <>
       <path d="M4 11c0-3 3.6-5 8-5s8 2 8 5" />
