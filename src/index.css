@@ -1,0 +1,18 @@
+:root {
+  --ink: #2b160b;
+  --coffee: #4a2a17;
+  --mocha: #6f4428;
+  --caramel: #b9793f;
+  --gold: #e0b060;
+  --paper: #f1e0c3;
+  --paper-2: #e6cfa6;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+html, body { min-height: 100%; }
+body {
+  font-family: 'Lora', Georgia, serif;
+  background: var(--ink);
+  color: var(--ink);
+  overflow-x: hidden;
+}
+button { font: inherit; cursor: pointer; border: 0; background: none; }

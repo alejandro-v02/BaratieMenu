@@ -1,0 +1,313 @@
+/* Carta digital · estilo manga en tonos café (tinta, tramas de puntos, líneas de acción) */
+:root {
+  --ink: #1a0d05;
+  --paper: #f6ead2;
+  --panel: #f0d9ad;
+  --accent: #1d5c6b;
+  --brown: #6f4428;
+  --caramel: #b9793f;
+}
+
+/* fondo fijo: no se mueve con el scroll */
+.bg {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100vh; height: 100lvh; z-index: -1;
+  transform: translateZ(0); will-change: transform; pointer-events: none;
+  background:
+    linear-gradient(rgba(40, 18, 6, .38), rgba(40, 18, 6, .38)),
+    url('/fondo.jpg') center top / cover no-repeat,
+    #d9b987;
+}
+
+.app { max-width: 520px; margin: 0 auto; min-height: 100dvh; padding-top: env(safe-area-inset-top); }
+
+.screen { position: relative; padding: 24px 16px 30px; overflow: hidden; }
+.screen > * { position: relative; z-index: 1; }
+
+/* trama de puntos en la esquina y onomatopeya en katakana */
+.screen::before {
+  content: ''; position: absolute; top: 0; right: 0; width: 70%; height: 240px; z-index: 0; pointer-events: none;
+  background: radial-gradient(circle, rgba(26, 13, 5, .5) 1.6px, transparent 2.1px) 0 0 / 9px 9px;
+  -webkit-mask-image: radial-gradient(circle at 100% 0, #000, transparent 70%);
+  mask-image: radial-gradient(circle at 100% 0, #000, transparent 70%);
+}
+.fx {
+  position: absolute !important; top: 6px; right: 8px; z-index: 0 !important; pointer-events: none;
+  font-family: 'Dela Gothic One', sans-serif; font-size: 2.6rem; line-height: 1;
+  color: transparent; -webkit-text-stroke: 2px rgba(26, 13, 5, .4);
+  transform: rotate(9deg);
+}
+
+/* portada */
+.cover { text-align: center; }
+.cover, .drinks-head { margin-bottom: 22px; }
+.skull { color: var(--ink); line-height: 0; }
+.cover h1, .drinks-head h1 {
+  font-family: 'Bangers', cursive; font-weight: 400; line-height: 1; letter-spacing: 4px;
+  font-size: 4.2rem; color: var(--paper);
+  -webkit-text-stroke: 6px var(--ink); paint-order: stroke fill;
+  text-shadow: 4px 4px 0 var(--ink), 7px 7px 0 var(--caramel);
+  transform: rotate(-2deg); margin-top: 4px;
+}
+.drinks-head h1 { font-size: 3.2rem; text-transform: uppercase; }
+.cover h3 {
+  display: inline-block; margin-top: 14px; padding: 3px 20px;
+  font-family: 'Bangers', cursive; font-weight: 400; font-size: 1.3rem; letter-spacing: 4px; text-transform: uppercase;
+  background: var(--accent); color: var(--paper); border: 3px solid var(--ink);
+  box-shadow: 4px 4px 0 var(--ink); transform: skewX(-10deg);
+}
+.cover p { margin-top: 12px; font-style: italic; font-weight: 600; font-size: .9rem; color: var(--ink); }
+.rule {
+  height: 5px; margin: 14px auto 0; width: 70%;
+  background: repeating-linear-gradient(90deg, var(--ink) 0 14px, transparent 14px 20px);
+}
+
+/* secciones */
+.section { margin-bottom: 14px; }
+.section-head { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.badge { flex: none; filter: drop-shadow(3px 3px 0 var(--ink)); }
+.section-title {
+  flex: 1; padding: 8px 12px 9px; background: var(--panel);
+  border: 3px solid var(--ink); box-shadow: 5px 5px 0 var(--ink);
+  transform: rotate(-1deg);
+}
+.section-title h2 {
+  font-family: 'Bangers', cursive; font-weight: 400; font-size: 1.7rem; letter-spacing: 2px; line-height: 1.05;
+  text-transform: uppercase; color: var(--ink); text-shadow: 2px 2px 0 var(--caramel);
+}
+.section-title p {
+  margin-top: 3px; padding-top: 4px; border-top: 2px dashed var(--brown);
+  font-family: 'Caveat', cursive; font-weight: 700; font-size: 1.12rem; line-height: 1.05; color: var(--brown);
+}
+
+.items { list-style: none; }
+.item {
+  display: flex; flex-direction: column; gap: 4px;
+  padding: 9px 12px; margin-bottom: 11px; border-radius: 3px;
+  background: var(--panel); border: 2.5px solid var(--ink); box-shadow: 4px 4px 0 var(--ink);
+}
+.item:nth-child(odd) { transform: rotate(-.5deg); }
+.item:nth-child(even) { transform: rotate(.5deg); }
+.item:active { transform: translate(3px, 3px); box-shadow: 1px 1px 0 var(--ink); }
+.item-text { display: flex; flex-direction: column; line-height: 1.15; }
+.item-text small {
+  font-family: 'Bangers', cursive; font-size: .95rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent);
+}
+.item-name { font-weight: 700; font-size: .98rem; color: var(--ink); }
+.price {
+  flex: none; padding: 1px 10px 2px; white-space: nowrap;
+  font-family: 'Bangers', cursive; font-size: 1.2rem; letter-spacing: 1px;
+  background: linear-gradient(#5a3416, #2e1508); color: var(--paper); border: 2px solid var(--ink);
+  box-shadow: 2px 2px 0 var(--ink); transform: rotate(-3deg);
+}
+
+.chips-wrap { padding: 12px; background: var(--panel); border: 2.5px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); border-radius: 3px; }
+.chips { display: flex; flex-wrap: wrap; gap: 9px; }
+.chip {
+  padding: 3px 12px; font-family: 'Bangers', cursive; font-size: 1.05rem; letter-spacing: 1px;
+  background: var(--ink); color: var(--paper); transform: skewX(-10deg);
+}
+.chips-price { margin-top: 12px; font-family: 'Caveat', cursive; font-weight: 700; font-size: 1.3rem; text-align: right; color: var(--ink); }
+.chips-price b {
+  font-family: 'Bangers', cursive; font-weight: 400; font-size: 1.2rem; letter-spacing: 1px;
+  background: linear-gradient(#5a3416, #2e1508); color: var(--paper); padding: 1px 9px; border: 2px solid var(--ink); margin-left: 4px; display: inline-block; transform: rotate(-3deg);
+}
+
+/* cierre como globo de diálogo */
+.menu-footer {
+  position: relative; text-align: center; margin: 6px 4px 22px; padding: 16px 12px; border-radius: 26px;
+  background: var(--panel); border: 3px solid var(--ink); box-shadow: 5px 5px 0 var(--ink);
+}
+.menu-footer::after {
+  content: ''; position: absolute; left: 34px; bottom: -12px; width: 20px; height: 20px;
+  background: var(--panel); border-right: 3px solid var(--ink); border-bottom: 3px solid var(--ink);
+  transform: rotate(45deg) skew(10deg, 10deg);
+}
+.menu-footer p { font-family: 'Caveat', cursive; font-weight: 700; font-size: 1.25rem; color: var(--brown); }
+.menu-footer strong { font-family: 'Bangers', cursive; font-weight: 400; font-size: 1.3rem; letter-spacing: 1.5px; color: var(--accent); }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+
+/* banderines curvos con punta en ambos lados (solo Entradas por ahora) */
+.banners { flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 4px; filter: drop-shadow(3px 3px 0 var(--ink)); }
+.pennant { clip-path: polygon(0 0, 100% 0, calc(100% - 16px) 50%, 100% 100%, 0 100%, 16px 50%); text-align: left; width: fit-content; max-width: 100%; }
+.pennant-title { background: linear-gradient(#5a3416, #2e1508); padding: 9px 26px 9px 20px; }
+.pennant-title h2 { font-family: 'Bangers', cursive; font-weight: 400; font-size: 1.45rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--paper); line-height: 1.1; }
+.pennant-quote { margin-left: 26px; max-width: calc(100% - 26px); background: var(--paper); padding: 6px 30px; }
+.pennant-quote p { font-family: 'Caveat', cursive; font-weight: 700; font-size: 1.15rem; line-height: 1.05; color: var(--ink); }
+
+/* secciones intercaladas: izquierda / derecha */
+.side-right .section-head { flex-direction: row-reverse; }
+.side-right .banners { align-items: flex-end; }
+.side-right .pennant-quote { margin-left: 0; margin-right: 26px; }
+.side-left .item { margin-right: 14px; }
+.side-right .item { margin-left: 14px; }
+
+.item-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.item-desc { font-size: .82rem; line-height: 1.3; font-style: italic; color: var(--brown); }
+
+/* Hamburguesas: nombre en fondo blanco con el precio al frente; abajo banderín del nivel y la descripción */
+.item-level { gap: 8px; }
+.item-level .item-top { justify-content: flex-start; flex-wrap: wrap; }
+.name-chip {
+  padding: 2px 12px 3px; background: #fff; color: var(--ink); border: 2px solid var(--ink);
+  box-shadow: 2px 2px 0 var(--ink); font-weight: 700; font-size: 1.02rem; line-height: 1.2;
+}
+.item-bottom { display: flex; align-items: center; gap: 10px; }
+.level-pennant {
+  flex: none; padding: 5px 24px 5px 12px; background: linear-gradient(#5a3416, #2e1508); color: var(--paper);
+  font-family: 'Bangers', cursive; font-size: .95rem; letter-spacing: 1.5px; text-transform: uppercase; white-space: nowrap;
+}
+
+/* nombre y precio quedan afuera; solo el banderín y la descripción van dentro de la tarjeta */
+.item-level { background: none; border: 0; box-shadow: none; padding: 0; gap: 0; transform: none !important; }
+.item-level .item-top { position: relative; z-index: 1; margin: 0 0 -6px 8px; }
+.item-level .item-bottom {
+  padding: 14px 12px 9px; background: var(--panel); border: 2.5px solid var(--ink);
+  box-shadow: 4px 4px 0 var(--ink); border-radius: 3px;
+}
+
+/* banderín del nivel: vertical, con las puntas solo abajo */
+.item-level .item-bottom { align-items: stretch; }
+.level-pennant {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - 14px), 0 100%);
+  writing-mode: vertical-rl; text-orientation: mixed; text-align: center;
+  padding: 8px 7px 22px; margin: -6px 0 -6px; min-height: 92px;
+  font-size: 1rem; letter-spacing: 2px;
+}
+.item-level .item-desc { align-self: center; }
+
+/* el texto del banderín va horizontal; solo la cinta es vertical */
+.level-pennant {
+  writing-mode: horizontal-tb; width: 60px; white-space: normal; line-height: 1.1;
+  padding: 10px 6px 24px; letter-spacing: 1px; min-height: 96px;
+  display: flex; align-items: flex-start; justify-content: center;
+}
+
+/* banderín compacto: NIVEL arriba y el número abajo */
+.item-level .item-bottom { align-items: center; }
+.level-pennant {
+  width: 52px; min-height: 0; margin: 0; align-self: center;
+  flex-direction: column; align-items: center; justify-content: flex-start; gap: 0;
+  padding: 6px 4px 18px; line-height: 1;
+}
+.level-pennant span { font-size: .72rem; letter-spacing: 1px; }
+.level-pennant b { font-family: 'Bangers', cursive; font-weight: 400; font-size: 1.5rem; line-height: 1; }
+
+/* banderín que "sale" por debajo de la etiqueta blanca del nombre */
+.item-level .item-bottom { position: relative; min-height: 70px; padding-left: 82px; }
+.level-pennant { position: absolute; left: 16px; top: -10px; z-index: 0; align-self: auto; padding-top: 20px; }
+
+/* efecto de viento: el banderín se mece desde donde cuelga */
+.level-pennant { transform-origin: 50% 14px; animation: wind 3.2s ease-in-out infinite alternate; }
+.item-level:nth-child(2) .level-pennant { animation-duration: 3.8s; animation-delay: -1s; }
+.item-level:nth-child(3) .level-pennant { animation-duration: 2.9s; animation-delay: -2s; }
+.item-level:nth-child(4) .level-pennant { animation-duration: 3.5s; animation-delay: -.5s; }
+@keyframes wind {
+  0%   { transform: rotate(-4deg) skewX(3deg) scaleY(.98); }
+  50%  { transform: rotate(2deg) skewX(-2deg) scaleY(1); }
+  100% { transform: rotate(5deg) skewX(-4deg) scaleY(.97); }
+}
+
+/* pantalla de carga */
+.splash {
+  position: fixed; inset: 0; z-index: 100; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px;
+  background: linear-gradient(rgba(30, 12, 3, .55), rgba(30, 12, 3, .78)), url('/fondo.jpg') center / cover no-repeat, #2b160b;
+  color: var(--paper); transition: opacity .7s ease; text-align: center; padding: 20px;
+}
+.splash.leaving { opacity: 0; pointer-events: none; }
+.splash-roger { color: var(--paper); line-height: 0; animation: sway 3.2s ease-in-out infinite alternate; filter: drop-shadow(3px 3px 0 var(--ink)); }
+@keyframes sway { from { transform: rotate(-4deg); } to { transform: rotate(4deg); } }
+.splash h1 {
+  font-family: 'Bangers', cursive; font-weight: 400; font-size: 3.8rem; letter-spacing: 4px; line-height: 1; color: var(--paper);
+  -webkit-text-stroke: 6px var(--ink); paint-order: stroke fill; text-shadow: 4px 4px 0 var(--ink), 7px 7px 0 var(--caramel);
+}
+.splash h3 {
+  padding: 3px 20px; font-family: 'Bangers', cursive; font-weight: 400; font-size: 1.2rem; letter-spacing: 4px; text-transform: uppercase;
+  background: var(--accent); color: var(--paper); border: 3px solid var(--ink); box-shadow: 4px 4px 0 var(--ink);
+}
+.bar { width: min(240px, 70%); height: 16px; margin-top: 14px; background: var(--panel); border: 3px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); overflow: hidden; }
+.bar i { display: block; height: 100%; width: 0; background: linear-gradient(#5a3416, #2e1508); animation: fill var(--t, 2s) cubic-bezier(.4, 0, .2, 1) forwards; }
+@keyframes fill { to { width: 100%; } }
+.loading { font-family: 'Bangers', cursive; letter-spacing: 3px; font-size: 1.2rem; }
+.loading::after { content: ''; animation: dots 1.2s steps(4, end) infinite; }
+@keyframes dots { 0% { content: ''; } 25% { content: '.'; } 50% { content: '..'; } 75% { content: '...'; } }
+
+/* sombras en los bordes de arriba y abajo, como en iPhone */
+.edge { position: fixed; left: 0; right: 0; z-index: 30; pointer-events: none; }
+.edge-top {
+  top: 0; height: calc(env(safe-area-inset-top) + 120px);
+  background: linear-gradient(rgba(26, 13, 5, .6), rgba(26, 13, 5, .28) 40%, rgba(26, 13, 5, .08) 75%, transparent);
+}
+.edge-bottom {
+  bottom: 0; height: calc(env(safe-area-inset-bottom) + 130px);
+  background: linear-gradient(0deg, rgba(26, 13, 5, .6), rgba(26, 13, 5, .28) 40%, rgba(26, 13, 5, .08) 75%, transparent);
+}
+
+/* ===== GLOBO: tarjetas como el globo de diálogo del cierre (borrar este bloque para volver) ===== */
+.item:not(.item-level), .item-level .item-bottom, .chips-wrap { position: relative; border-radius: 26px; }
+.item:not(.item-level), .chips-wrap { padding: 12px 20px; }
+.item-level .item-bottom { padding-left: 82px; padding-right: 20px; }
+.item { margin-bottom: 18px; }
+.chips-wrap { margin-bottom: 20px; }
+
+/* colita triangular, igual que la del globo final */
+.item:not(.item-level)::after, .item-level .item-bottom::after, .chips-wrap::after {
+  content: ''; position: absolute; left: 32px; bottom: -12px; width: 18px; height: 18px;
+  background: var(--panel); border-right: 2.5px solid var(--ink); border-bottom: 2.5px solid var(--ink);
+  transform: rotate(45deg) skew(10deg, 10deg);
+}
+/* secciones de la derecha: la colita va al otro lado */
+.side-right .item:not(.item-level)::after, .side-right .item-level .item-bottom::after, .side-right .chips-wrap::after { left: auto; right: 32px; }
+/* ===== fin GLOBO ===== */
+
+/* ===== NUBE FINAL: el cierre en forma de nube (borrar este bloque para volver al globo) ===== */
+.menu-footer {
+  position: relative; background: none; border: 0; box-shadow: none; border-radius: 0;
+  margin: 10px 0 30px; padding: 72px 46px 46px; min-height: 220px;
+  display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+}
+.cloud-bg {
+  position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; overflow: visible;
+  filter: drop-shadow(4px 4px 0 var(--ink));
+}
+.cloud-bg path { fill: var(--panel); stroke: var(--ink); stroke-width: 3; vector-effect: non-scaling-stroke; stroke-linejoin: round; }
+.menu-footer p, .menu-footer strong { position: relative; z-index: 1; }
+.menu-footer strong { display: block; margin-top: 2px; line-height: 1.15; }
+/* sin colita ni burbujitas */
+.menu-footer::before, .menu-footer::after { content: none; }
+/* ===== fin NUBE FINAL ===== */
+
+/* logo de Luffy centrado en el fondo (fijo, no se mueve con el scroll) */
+.bg-logo {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100vh; height: 100lvh; z-index: -1; pointer-events: none;
+  background: url('/logo.png') center / min(100vw, 560px) no-repeat;
+  opacity: .4; transform: translateZ(0);
+}
+
+/* separador entre secciones: línea punteada crema con calavera al centro */
+.divider { display: flex; align-items: center; gap: 12px; margin: 4px 4px 6px; color: var(--paper); filter: drop-shadow(2px 2px 0 var(--ink)); }
+.divider-line {
+  flex: 1; height: 5px;
+  background: repeating-linear-gradient(90deg, var(--paper) 0 14px, transparent 14px 20px);
+}
+.divider svg { flex: none; }
+
+/* personajes recortados junto a las tarjetas: las tarjetas se encogen para dejarles lugar */
+.section { position: relative; }
+.has-char .items, .has-char .chips-wrap { width: calc(100% - 104px); }
+.has-char.side-left .items, .has-char.side-left .chips-wrap { margin-right: auto; margin-left: 0; }
+.has-char.side-right .items, .has-char.side-right .chips-wrap { margin-left: auto; margin-right: 0; }
+.section-char {
+  position: absolute; bottom: 4px; width: 128px; height: min(210px, 62%); display: flex; align-items: flex-end;
+  z-index: 2; pointer-events: none;
+}
+.section-char.char-right { right: -8px; justify-content: flex-end; }
+.section-char.char-left { left: -8px; justify-content: flex-start; }
+.section-char img { max-width: 100%; max-height: 100%; object-fit: contain; object-position: bottom; filter: drop-shadow(3px 3px 0 var(--ink)); }
+.char-placeholder {
+  width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; text-align: center; padding: 6px;
+  border: 3px dashed var(--paper); border-radius: 14px; color: var(--paper); background: rgba(246, 234, 210, .12);
+  font-family: 'Bangers', cursive; letter-spacing: 1.5px; font-size: 1.05rem;
+}

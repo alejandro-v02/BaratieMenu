@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 700" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <radialGradient id="base" cx="50%" cy="45%" r="75%">
+      <stop offset="0" stop-color="#e2b676"/>
+      <stop offset=".7" stop-color="#c9954f"/>
+      <stop offset="1" stop-color="#a8702f"/>
+    </radialGradient>
+    <radialGradient id="burn" cx="50%" cy="50%" r="72%">
+      <stop offset=".55" stop-color="#3a1604" stop-opacity="0"/>
+      <stop offset="1" stop-color="#3a1604" stop-opacity=".7"/>
+    </radialGradient>
+    <filter id="grain" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" seed="3"/>
+      <feColorMatrix values="0 0 0 0 .25  0 0 0 0 .12  0 0 0 0 .03  0 0 0 .6 -.2"/>
+    </filter>
+    <filter id="stains" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency=".009" numOctaves="4" seed="8"/>
+      <feColorMatrix values="0 0 0 0 .35  0 0 0 0 .17  0 0 0 0 .05  0 0 0 2 -.75"/>
+    </filter>
+  </defs>
+
+  <rect width="400" height="700" fill="url(#base)"/>
+  <rect width="400" height="700" filter="url(#stains)" opacity=".75"/>
+
+  <!-- continentes y costas -->
+  <g fill="#9c6a2e" fill-opacity=".22" stroke="#5a3416" stroke-opacity=".5" stroke-width="1.3">
+    <path d="M-10 110C30 80 70 120 115 98S170 40 150 10L-10 -10Z"/>
+    <path d="M250 190C290 160 340 185 365 230S410 300 380 340 300 360 270 320 215 220 250 190Z"/>
+    <path d="M-10 420C40 390 90 430 120 480S90 580 40 600-10 560-10 560Z"/>
+    <path d="M230 520C270 490 330 520 350 570S320 660 270 650 200 560 230 520Z"/>
+  </g>
+  <g fill="none" stroke="#5a3416" stroke-opacity=".35" stroke-width=".8">
+    <path d="M18 100C40 90 62 110 90 96"/><path d="M270 205C296 188 330 205 346 235"/>
+    <path d="M10 450C40 440 70 462 92 495"/><path d="M245 545C272 528 312 545 326 575"/>
+  </g>
+
+  <!-- rutas y marcas -->
+  <g fill="none" stroke="#4a2a17" stroke-opacity=".5" stroke-width="1.2" stroke-dasharray="6 5" stroke-linecap="round">
+    <path d="M40 300C120 250 160 380 240 330S330 440 380 410"/>
+    <path d="M120 140C150 200 190 210 205 280"/>
+    <path d="M80 640C160 600 200 650 300 610"/>
+  </g>
+  <g stroke="#7a1d12" stroke-opacity=".7" stroke-width="3" stroke-linecap="round">
+    <path d="M372 404l12 12M384 404l-12 12"/>
+  </g>
+  <g fill="#4a2a17" fill-opacity=".4"><circle cx="40" cy="300" r="3"/><circle cx="205" cy="280" r="3"/><circle cx="300" cy="610" r="3"/></g>
+
+  <!-- timón del barco -->
+  <g transform="translate(200 360)" fill="none" stroke="#3a1d0d" stroke-opacity=".16" stroke-linecap="round">
+    <circle r="125" stroke-width="12"/><circle r="98" stroke-width="3"/><circle r="22" stroke-width="8"/>
+    <g stroke-width="9">
+      <path d="M0 -22V-170M0 22V170M-22 0H-170M22 0H170M15.5 -15.5L120 -120M-15.5 15.5L-120 120M15.5 15.5L120 120M-15.5 -15.5L-120 -120"/>
+    </g>
+    <g fill="#3a1d0d" fill-opacity=".16" stroke="none">
+      <circle cx="0" cy="-172" r="9"/><circle cx="0" cy="172" r="9"/><circle cx="-172" cy="0" r="9"/><circle cx="172" cy="0" r="9"/>
+      <circle cx="122" cy="-122" r="9"/><circle cx="-122" cy="122" r="9"/><circle cx="122" cy="122" r="9"/><circle cx="-122" cy="-122" r="9"/>
+    </g>
+  </g>
+
+  <!-- rosa de los vientos -->
+  <g transform="translate(335 80)" fill="none" stroke="#4a2a17" stroke-opacity=".38">
+    <circle r="44" stroke-width="1.6"/><circle r="34" stroke-width=".8"/>
+    <path d="M0 -58L8 -8L58 0L8 8L0 58L-8 8L-58 0L-8 -8Z" fill="#4a2a17" fill-opacity=".18" stroke-width="1.2"/>
+    <path d="M0 -40L5 -5L40 0L5 5L0 40L-5 5L-40 0L-5 -5Z" stroke-width=".8"/>
+  </g>
+
+  <rect width="400" height="700" filter="url(#grain)" opacity=".9"/>
+  <rect width="400" height="700" fill="url(#burn)"/>
+</svg>
