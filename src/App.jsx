@@ -1,6 +1,7 @@
 import { Fragment, useCallback, useEffect, useState } from 'react'
-import { pages } from './menuData'
+import { pages, mysteryBox } from './menuData'
 import Badge, { JollyRoger } from './Badge'
+import { FloatingChest } from './Chest'
 import './styles.css'
 
 const berry = (p) => (p.startsWith('+') ? `+฿${p.slice(1)}` : `฿${p}`)
@@ -17,8 +18,8 @@ pages.forEach((p) => {
 
 function Section({ section }) {
   return (
-    <section className={`section side-${sides[section.title]}${section.char && !section.charBelow ? ' has-char' : ''}`}>
-      {section.char && !section.charBelow && <Character n={section.char} side={sides[section.title] === 'left' ? 'right' : 'left'} />}
+    <section className={`section side-${sides[section.title]}${section.char && !section.charBelow ? ' has-char' : ''}${section.charPeek ? ' has-peek' : ''}${section.stretchFirst ? ' stretch-first' : ''}`}>
+      {section.char && !section.charBelow && <Character n={section.char} peek={section.charPeek} messages={section.charMessages} bubble={section.charBubble} shout={section.charShout} side={sides[section.title] === 'left' ? 'right' : 'left'} />}
       <div className="section-head">
         {!section.noBadge && <Badge icon={section.icon} photo={section.photo} pop={section.pop} size={136} />}
         <div className="banners">
@@ -65,6 +66,7 @@ function Section({ section }) {
           ))}
         </ul>
       )}
+      {section.strip && <img className="section-strip" src={section.strip} alt="" loading="lazy" />}
       {section.chips && (
         <div className="chips-wrap">
           <div className="chips">
@@ -96,14 +98,49 @@ function Divider() {
 
 // Personaje recortado (PNG sin fondo) junto a las tarjetas de una sección.
 // Coloca las imágenes en public/personajes/personaje-1.png ... personaje-6.png
-function Character({ n, side }) {
+function Character({ n, side, peek, messages, bubble, shout }) {
   const [missing, setMissing] = useState(false)
+  const [msg, setMsg] = useState(null) // { text, key }
+  const [count, setCount] = useState(0)
+  const [leaving, setLeaving] = useState(false)
+
+  // al tocar al personaje sale un mensaje en un globo; se va solo a los pocos segundos
+  const talk = () => {
+    if (!messages?.length) return
+    setLeaving(false)
+    setMsg({ text: messages[count % messages.length], key: count })
+    setCount((c) => c + 1)
+  }
+  useEffect(() => {
+    if (!msg) return
+    // se queda unos 2,6 s, se desvanece en 0,4 s y se quita
+    const fade = setTimeout(() => setLeaving(true), 2600)
+    const done = setTimeout(() => setMsg(null), 3000)
+    return () => {
+      clearTimeout(fade)
+      clearTimeout(done)
+    }
+  }, [msg])
+
+  const img = missing ? (
+    <div className="char-placeholder">Personaje {n}</div>
+  ) : (
+    <img src={`/personajes/personaje-${n}.png`} alt="" loading="lazy" onError={() => setMissing(true)} />
+  )
+
   return (
-    <div className={`section-char char-${side}`}>
-      {missing ? (
-        <div className="char-placeholder">Personaje {n}</div>
+    <div className={`section-char char-${side}${peek ? ' char-peek' : ''}${messages ? ' talks' : ''}${bubble === 'top' ? ' bubble-top' : ''}${shout ? ' shout' : ''}`}>
+      {messages ? (
+        <button type="button" className="char-btn" onClick={talk} aria-label="Tocar al personaje">
+          {img}
+        </button>
       ) : (
-        <img src={`/personajes/personaje-${n}.png`} alt="" loading="lazy" onError={() => setMissing(true)} />
+        img
+      )}
+      {msg && (
+        <div className={`char-bubble${leaving ? ' leaving' : ''}`} key={msg.key} role="status">
+          {msg.text}
+        </div>
       )}
     </div>
   )
@@ -200,6 +237,7 @@ export default function App() {
               <Page key={p.id} page={p} lastPage={i === pages.length - 1} />
             ))}
           </main>
+          <FloatingChest box={mysteryBox} />
         </>
       )}
       {phase !== 'done' && <Splash leaving={phase === 'leaving'} onDone={finishLoading} />}

@@ -4,6 +4,13 @@
 const entradas = {
   title: 'Entradas',
   char: 1,
+  charPeek: true,
+  charMessages: [
+    '¡Quiero carne!',
+    'Esto está bueno... ¿pero dónde está la salida?',
+    '¡La cocina del Baratie es mía!',
+    '¡Pidan sin miedo, nakamas!',
+  ],
   noBadge: true,
   icon: 'empanada',
   quote: 'Toda gran aventura comienza con un bocado',
@@ -16,6 +23,7 @@ const entradas = {
 const hamburguesas = {
   title: 'Hamburguesas',
   photo: '/personajes/hamburguesas.jpg',
+  strip: '/personajes/tripulacion.png',
   icon: 'burger',
   quote: 'Rangos de poder',
   items: [
@@ -40,7 +48,7 @@ const hotdogs = {
 
 const otras = {
   title: 'Otras Delicias',
-  photo: '/personajes/otras-delicias.jpg',
+  photo: '/personajes/otras-delicias.png',
   char: 2,
   icon: 'chest',
   quote: 'Sabores de otro mundo',
@@ -55,6 +63,14 @@ const especiales = {
   title: 'Especiales',
   photo: '/personajes/especiales.png',
   char: 3,
+  stretchFirst: true,
+  charBubble: 'top',
+  charMessages: [
+    '¡Itadakimasu!',
+    '¡Este ramen está buenísimo!',
+    '¡Tengo hambre otra vez!',
+    '¿Me regalas otro tazón?',
+  ],
   icon: 'gem',
   quote: 'El Botín oculto que solo verdaderos piratas se atreven a probar',
   items: [
@@ -79,11 +95,20 @@ const limonadas = {
 
 const sodas = {
   title: 'Sodas Saborizadas',
+  photo: '/personajes/sodas-saborizadas.jpg',
   char: 4,
+  charBubble: 'top',
+  charShout: true,
+  charMessages: [
+    '¡QUIERO UNA SODA!',
+    '¡SOY UN RENO, NO UN MAPACHE!',
+    '¡NO ME HAGAS FELIZ, IDIOTA!',
+    '¡SOY EL DOCTOR... Y TENGO SED!',
+  ],
   icon: 'soda',
   quote: 'Burbujas con el poder de una fruta del diablo',
   items: [
-    { name: 'Capitán Shaks', tag: 'Fresa', price: '15.000' },
+    { name: 'Capitán Shanks', tag: 'Fresa', price: '15.000' },
     { name: 'Sanji', tag: 'Maracuyá', price: '15.000' },
     { name: 'Zoro', tag: 'Mango biche', price: '15.000' },
     { name: 'Franky', tag: 'Blueberry', price: '15.000' },
@@ -92,6 +117,7 @@ const sodas = {
 
 const granizados = {
   title: 'Granizados',
+  photo: '/personajes/granizados.jpg',
   char: 5,
   charBelow: true,
   icon: 'ice',
@@ -106,6 +132,7 @@ const granizados = {
 
 const malteadas = {
   title: 'Malteadas',
+  photo: '/personajes/malteadas.jpg',
   char: 6,
   icon: 'shake',
   quote: 'Ricas y cremosas, preparadas por el gremio de cazadores',
@@ -114,6 +141,7 @@ const malteadas = {
 
 const helados = {
   title: 'Helados',
+  photo: '/personajes/helados.png',
   icon: 'icecream',
   quote: 'Sabores para pasar el rato',
   chips: {
@@ -121,6 +149,19 @@ const helados = {
     price: '5.000',
     flavors: ['Chocolate', 'Fresa', 'Maracuyá', 'Brownie', 'Veteado de mora'],
   },
+}
+
+// Cofre flotante: siempre visible abajo; al tocarlo abre el modal con lo que trae la cajita
+export const mysteryBox = {
+  price: '25.000',
+  hint: 'Toca cada carta para descubrir qué trae',
+  messages: ['¡Cajita sorpresa!', '¿Qué traerá?', '¡Ábrela!', '¡Misterio por ฿25.000!'],
+  items: [
+    { icon: 'burger', name: 'Hamburguesa' },
+    { icon: 'lemonade', name: 'Bebida' },
+    { icon: 'gift', name: 'Sorpresa', secret: '¡Es un secreto!' },
+    { icon: 'cards', name: 'Sobre de cartas' },
+  ],
 }
 
 export const pages = [
@@ -131,6 +172,7 @@ export const pages = [
     fx: 'ザブン!',
     title: 'Bebidas',
     icon: 'lemonade',
+    photo: '/personajes/bebidas.jpg',
     subtitle: 'El tesoro más refrescante de los siete mares',
     sections: [limonadas, sodas, granizados],
   },

@@ -324,3 +324,64 @@
 .section-char.char-below { position: static; width: 100%; height: auto; justify-content: center; margin: 2px 0 -6px; }
 .section-char.char-below img { width: auto; max-width: 100%; max-height: 150px; }
 .section-char.char-below .char-placeholder { height: 110px; }
+
+/* personaje que se asoma por el borde de la pantalla (el muro de la imagen queda en el borde) */
+.section-char.char-peek { height: 100%; width: auto; bottom: 0; }
+.section-char.char-peek.char-right { right: -16px; }
+.section-char.char-peek.char-left { left: -16px; }
+.section-char.char-peek img { height: 100%; width: auto; max-width: none; }
+.section-char.char-peek.char-right img { transform: translateX(10.5%); }
+.has-char.has-peek .items, .has-char.has-peek .chips-wrap { width: calc(100% - 46px); }
+
+/* Entradas: el personaje queda más abajo y el banderín de la frase se angosta para que no lo tape */
+.section-char.char-peek { height: 84%; }
+.has-peek .banners { max-width: calc(100% - 76px); }
+.has-peek .pennant-quote { max-width: calc(100% - 26px); }
+
+/* Especiales: el primer plato queda libre (el personaje solo ocupa los de abajo), así que ocupa todo el ancho */
+.has-char.stretch-first .items { width: 100%; margin: 0; }
+.has-char.stretch-first.side-left .item:not(:first-child) { width: calc(100% - 104px); margin-right: auto; }
+.has-char.stretch-first.side-right .item:not(:first-child) { width: calc(100% - 104px); margin-left: auto; }
+
+/* personaje que habla al tocarlo */
+.section-char.talks { pointer-events: auto; }
+.char-btn { all: unset; display: contents; cursor: pointer; }
+.section-char.talks img { cursor: pointer; }
+.char-bubble {
+  position: absolute; right: calc(100% + 2px); top: 4%; width: max-content; max-width: 150px; z-index: 6;
+  padding: 8px 12px; border: 2.5px solid var(--ink); border-radius: 18px; background: var(--panel); color: var(--ink);
+  box-shadow: 3px 3px 0 var(--ink); font-family: 'Caveat', cursive; font-weight: 700; font-size: 1.15rem; line-height: 1.05;
+  animation: bubble-in .2s ease-out;
+}
+/* colita del globo, apuntando al personaje */
+.char-bubble::after {
+  content: ''; position: absolute; right: -9px; top: 22px; width: 14px; height: 14px; background: var(--panel);
+  border-top: 2.5px solid var(--ink); border-right: 2.5px solid var(--ink); transform: rotate(45deg) skew(8deg, 8deg);
+}
+@keyframes bubble-in { from { opacity: 0; transform: translateY(4px); } }
+
+.char-bubble.leaving { opacity: 0; transition: opacity .4s ease-in; }
+
+/* globo encima del personaje (Goku) */
+.talks.bubble-top .char-bubble { right: 0; top: auto; bottom: calc(100% + 10px); max-width: 170px; }
+.talks.bubble-top .char-bubble::after {
+  right: 34px; top: auto; bottom: -9px; border-top: 0; border-right: 2.5px solid var(--ink); border-bottom: 2.5px solid var(--ink);
+}
+
+/* el globo de Goku pegado a su cabeza: el contenedor se ajusta a la altura de la imagen */
+.section-char.talks.bubble-top { height: auto; }
+.section-char.talks.bubble-top img { max-height: 210px; }
+.talks.bubble-top .char-bubble { bottom: calc(100% + 4px); }
+
+/* personaje del lado izquierdo con el globo encima: el globo se alinea a la izquierda */
+.char-left.talks.bubble-top .char-bubble { right: auto; left: 0; }
+.char-left.talks.bubble-top .char-bubble::after { right: auto; left: 34px; }
+
+/* Chopper gritando: letras grandes, en mayúsculas y el globo ligeramente torcido */
+.shout .char-bubble {
+  font-family: 'Bangers', cursive; font-weight: 400; font-size: 1.15rem; letter-spacing: 1px; line-height: 1.1;
+  text-transform: uppercase; transform: rotate(-2deg); max-width: 190px; padding: 8px 14px;
+}
+
+/* franja de personajes al final de una sección */
+.section-strip { display: block; width: 100%; height: auto; margin: 4px 0 0; filter: drop-shadow(2px 2px 0 var(--ink)); }
