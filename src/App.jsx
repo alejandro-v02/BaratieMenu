@@ -17,10 +17,10 @@ pages.forEach((p) => {
 
 function Section({ section }) {
   return (
-    <section className={`section side-${sides[section.title]}${section.char ? ' has-char' : ''}`}>
-      {section.char && <Character n={section.char} side={sides[section.title] === 'left' ? 'right' : 'left'} />}
+    <section className={`section side-${sides[section.title]}${section.char && !section.charBelow ? ' has-char' : ''}`}>
+      {section.char && !section.charBelow && <Character n={section.char} side={sides[section.title] === 'left' ? 'right' : 'left'} />}
       <div className="section-head">
-        {!section.noBadge && <Badge icon={section.icon} photo={section.photo} size={136} />}
+        {!section.noBadge && <Badge icon={section.icon} photo={section.photo} pop={section.pop} size={136} />}
         <div className="banners">
           <div className="pennant pennant-title">
             <h2>{section.title}</h2>
@@ -79,6 +79,7 @@ function Section({ section }) {
           </p>
         </div>
       )}
+      {section.char && section.charBelow && <Character n={section.char} side="below" />}
     </section>
   )
 }

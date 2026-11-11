@@ -311,3 +311,16 @@
   border: 3px dashed var(--paper); border-radius: 14px; color: var(--paper); background: rgba(246, 234, 210, .12);
   font-family: 'Bangers', cursive; letter-spacing: 1.5px; font-size: 1.05rem;
 }
+
+/* el anillo del círculo gira despacio; la foto del centro queda quieta */
+.badge-ring { transform-box: view-box; transform-origin: 50% 50%; animation: ring-spin 22s linear infinite; }
+@keyframes ring-spin { to { transform: rotate(360deg); } }
+
+/* personaje completo que sale del círculo (imagen sin fondo) */
+.badge { overflow: visible; }
+.badge-pop { filter: drop-shadow(2px 2px 0 #1a0d05); }
+
+/* personaje horizontal: va debajo de las tarjetas, ocupando el ancho */
+.section-char.char-below { position: static; width: 100%; height: auto; justify-content: center; margin: 2px 0 -6px; }
+.section-char.char-below img { width: auto; max-width: 100%; max-height: 150px; }
+.section-char.char-below .char-placeholder { height: 110px; }

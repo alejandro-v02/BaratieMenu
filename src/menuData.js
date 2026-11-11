@@ -28,6 +28,7 @@ const hamburguesas = {
 
 const hotdogs = {
   title: 'Hot Dogs',
+  photo: '/personajes/hot-dogs.jpg',
   icon: 'hotdog',
   quote: 'Cazadores Legendarios',
   items: [
@@ -39,6 +40,7 @@ const hotdogs = {
 
 const otras = {
   title: 'Otras Delicias',
+  photo: '/personajes/otras-delicias.jpg',
   char: 2,
   icon: 'chest',
   quote: 'Sabores de otro mundo',
@@ -51,6 +53,7 @@ const otras = {
 
 const especiales = {
   title: 'Especiales',
+  photo: '/personajes/especiales.png',
   char: 3,
   icon: 'gem',
   quote: 'El Botín oculto que solo verdaderos piratas se atreven a probar',
@@ -90,6 +93,7 @@ const sodas = {
 const granizados = {
   title: 'Granizados',
   char: 5,
+  charBelow: true,
   icon: 'ice',
   quote: 'Primera postura, concentración total para tu sed',
   items: [

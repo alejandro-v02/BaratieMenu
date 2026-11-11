@@ -2,7 +2,7 @@ import { useId } from 'react'
 import Icon from './Icon'
 
 /* Insignia circular tipo cartel "WANTED · DEAD OR ALIVE" */
-export default function Badge({ icon, photo, size = 74 }) {
+export default function Badge({ icon, photo, pop, size = 74 }) {
   const id = useId().replace(/:/g, '')
   return (
     <svg className="badge" width={size} height={size} viewBox="0 0 100 100" aria-hidden="true">
@@ -11,18 +11,28 @@ export default function Badge({ icon, photo, size = 74 }) {
         <path id={`b${id}`} d="M 5 50 A 45 45 0 0 0 95 50" />
         <clipPath id={`c${id}`}><circle cx="50" cy="50" r="32" /></clipPath>
       </defs>
-      <circle cx="50" cy="50" r="48" fill="#c9985a" stroke="#3a1d0d" strokeWidth="3" />
-      <circle cx="50" cy="50" r="33" fill="#ecd3a3" stroke="#3a1d0d" strokeWidth="2" />
-      <text fill="#3a1d0d" fontFamily="Bangers, cursive" fontWeight="400" fontSize="10" letterSpacing="1.5" textAnchor="middle">
-        <textPath href={`#t${id}`} startOffset="50%">WANTED</textPath>
-      </text>
-      <text fill="#3a1d0d" fontFamily="Bangers, cursive" fontWeight="400" fontSize="8.5" letterSpacing="1" textAnchor="middle">
-        <textPath href={`#b${id}`} startOffset="50%">DEAD OR ALIVE</textPath>
-      </text>
-      <g transform="translate(30 30)" color="#3a1d0d">
-        <Icon name={icon} size={40} />
+      {/* anillo con el texto: es lo único que gira */}
+      <g className="badge-ring">
+        <circle cx="50" cy="50" r="48" fill="#c9985a" stroke="#3a1d0d" strokeWidth="3" />
+        <circle cx="10.5" cy="50" r="2.2" fill="#3a1d0d" />
+        <circle cx="89.5" cy="50" r="2.2" fill="#3a1d0d" />
+        <text fill="#3a1d0d" fontFamily="Bangers, cursive" fontWeight="400" fontSize="10" letterSpacing="1.5" textAnchor="middle">
+          <textPath href={`#t${id}`} startOffset="50%">WANTED</textPath>
+        </text>
+        <text fill="#3a1d0d" fontFamily="Bangers, cursive" fontWeight="400" fontSize="8.5" letterSpacing="1" textAnchor="middle">
+          <textPath href={`#b${id}`} startOffset="50%">DEAD OR ALIVE</textPath>
+        </text>
       </g>
-      {photo && <image href={photo} x="17" y="17" width="66" height="66" preserveAspectRatio="xMidYMid slice" clipPath={`url(#c${id})`} />}
+      <circle cx="50" cy="50" r="33" fill="#ecd3a3" stroke="#3a1d0d" strokeWidth="2" />
+      {!photo && (
+        <g transform="translate(30 30)" color="#3a1d0d">
+          <Icon name={icon} size={40} />
+        </g>
+      )}
+      {photo && pop && (
+        <image href={photo} x="8" y="-6" width="84" height="104" preserveAspectRatio="xMidYMax meet" className="badge-pop" />
+      )}
+      {photo && !pop && <image href={photo} x="17" y="17" width="66" height="66" preserveAspectRatio="xMidYMid slice" clipPath={`url(#c${id})`} />}
     </svg>
   )
 }
