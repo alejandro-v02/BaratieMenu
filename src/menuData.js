@@ -207,7 +207,7 @@ export const mysteryBox = {
   hint: 'Toca cada carta para descubrir qué trae',
   messages: ['¡Cajita sorpresa!', '¿Qué traerá?', '¡Ábrela!', '¡Misterio por ฿25.000!'],
   items: [
-    { icon: 'burger', name: 'Hamburguesa' },
+    { icon: 'burger', name: 'Mini hamburguesa' },
     { icon: 'lemonade', name: 'Bebida' },
     { icon: 'gift', name: 'Sorpresa', secret: '¡Es un secreto!' },
     { icon: 'cards', name: 'Sobre de cartas' },
