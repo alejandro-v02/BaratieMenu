@@ -1,4 +1,5 @@
 :root {
+  color-scheme: only light;
   --ink: #2b160b;
   --coffee: #4a2a17;
   --mocha: #6f4428;
@@ -26,3 +27,9 @@ html, body, #root, #root * {
 img, svg { -webkit-user-drag: none; user-drag: none; }
 body { touch-action: manipulation; }
 ::selection { background: transparent; }
+
+/* que ningún navegador oscurezca la carta por su cuenta (modo oscuro forzado de Samsung Internet, Chrome, etc.) */
+html, body, #root { color-scheme: only light; }
+@media (prefers-color-scheme: dark) {
+  :root, html, body, #root { color-scheme: only light; }
+}
