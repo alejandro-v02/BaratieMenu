@@ -16,10 +16,63 @@ pages.forEach((p) => {
   })
 })
 
+// Imagen con varios personajes: cada uno tiene su zona y, al tocarlo, dice su propio mensaje
+function CharGroup({ group }) {
+  const [counts, setCounts] = useState(() => group.members.map(() => 0))
+  const [msg, setMsg] = useState(null) // { who, text, key }
+  const [leaving, setLeaving] = useState(false)
+
+  const talk = (i) => {
+    const list = group.members[i].messages
+    setMsg({ who: i, text: list[counts[i] % list.length], key: Date.now() })
+    setCounts((c) => c.map((n, k) => (k === i ? n + 1 : n)))
+    setLeaving(false)
+  }
+
+  useEffect(() => {
+    if (!msg) return
+    const fade = setTimeout(() => setLeaving(true), 2600)
+    const done = setTimeout(() => setMsg(null), 3000)
+    return () => {
+      clearTimeout(fade)
+      clearTimeout(done)
+    }
+  }, [msg])
+
+  const who = msg ? group.members[msg.who] : null
+  const center = who ? who.left + who.width / 2 : 0
+
+  return (
+    <div className="char-group">
+      <img src={group.src} alt="" loading="lazy" />
+      {group.members.map((mem, i) => (
+        <button
+          type="button"
+          key={mem.name}
+          className="char-hit"
+          style={{ left: `${mem.left}%`, width: `${mem.width}%` }}
+          onClick={() => talk(i)}
+          aria-label={`Tocar a ${mem.name}`}
+        />
+      ))}
+      {msg && (
+        <div
+          key={msg.key}
+          role="status"
+          className={`char-bubble group-bubble align-${who.align}${leaving ? ' leaving' : ''}`}
+          style={{ '--cx': `${center}%` }}
+        >
+          {msg.text}
+        </div>
+      )}
+    </div>
+  )
+}
+
 function Section({ section }) {
   return (
-    <section className={`section side-${sides[section.title]}${section.char && !section.charBelow ? ' has-char' : ''}${section.charPeek ? ' has-peek' : ''}${section.stretchFirst ? ' stretch-first' : ''}`}>
-      {section.char && !section.charBelow && <Character n={section.char} peek={section.charPeek} messages={section.charMessages} bubble={section.charBubble} shout={section.charShout} side={sides[section.title] === 'left' ? 'right' : 'left'} />}
+    <section className={`section side-${sides[section.title]}${section.char && !section.charBelow ? ' has-char' : ''}${section.charPeek ? ' has-peek' : ''}${section.charWide ? ' char-wide' : ''}${section.stretchFirst ? ` stretch-first stretch-${Number(section.stretchFirst)}` : ''}`}>
+      {section.char && !section.charBelow && <Character n={section.char} peek={section.charPeek} messages={section.charMessages} members={section.charMembers} rock={section.charRock} bubble={section.charBubble} shout={section.charShout} side={sides[section.title] === 'left' ? 'right' : 'left'} />}
       <div className="section-head">
         {!section.noBadge && <Badge icon={section.icon} photo={section.photo} pop={section.pop} size={136} />}
         <div className="banners">
@@ -66,6 +119,7 @@ function Section({ section }) {
           ))}
         </ul>
       )}
+      {section.group && <CharGroup group={section.group} />}
       {section.strip && <img className="section-strip" src={section.strip} alt="" loading="lazy" />}
       {section.chips && (
         <div className="chips-wrap">
@@ -98,11 +152,21 @@ function Divider() {
 
 // Personaje recortado (PNG sin fondo) junto a las tarjetas de una sección.
 // Coloca las imágenes en public/personajes/personaje-1.png ... personaje-6.png
-function Character({ n, side, peek, messages, bubble, shout }) {
+function Character({ n, side, peek, messages, members, bubble, shout, rock }) {
   const [missing, setMissing] = useState(false)
   const [msg, setMsg] = useState(null) // { text, key }
   const [count, setCount] = useState(0)
+  const [counts, setCounts] = useState(() => (members ? members.map(() => 0) : []))
   const [leaving, setLeaving] = useState(false)
+  const [rockKey, setRockKey] = useState(0) // cada toque reinicia el vaivén
+
+  // varios personajes en la misma imagen: cada uno dice sus propios mensajes
+  const talkMember = (i) => {
+    const list = members[i].messages
+    setLeaving(false)
+    setMsg({ text: list[counts[i] % list.length], key: Date.now(), who: i })
+    setCounts((c) => c.map((n2, k) => (k === i ? n2 + 1 : n2)))
+  }
 
   // al tocar al personaje sale un mensaje en un globo; se va solo a los pocos segundos
   const talk = () => {
@@ -125,20 +189,57 @@ function Character({ n, side, peek, messages, bubble, shout }) {
   const img = missing ? (
     <div className="char-placeholder">Personaje {n}</div>
   ) : (
-    <img src={`/personajes/personaje-${n}.png`} alt="" loading="lazy" onError={() => setMissing(true)} />
+    <img key={rockKey} className={rockKey ? 'rocking' : undefined} src={`/personajes/personaje-${n}.png`} alt="" loading="lazy" onError={() => setMissing(true)} />
   )
 
   return (
-    <div className={`section-char char-${side}${peek ? ' char-peek' : ''}${messages ? ' talks' : ''}${bubble === 'top' ? ' bubble-top' : ''}${shout ? ' shout' : ''}`}>
-      {messages ? (
-        <button type="button" className="char-btn" onClick={talk} aria-label="Tocar al personaje">
+    <div className={`section-char char-${side}${peek ? ' char-peek' : ''}${messages || members || rock ? ' talks' : ''}${bubble === 'top' ? ' bubble-top' : ''}${shout ? ' shout' : ''}`}>
+      {members ? (
+        <div className="char-body">
+          {img}
+          {members.map((mem, i) => (
+            <button
+              type="button"
+              key={mem.name}
+              className="char-zone"
+              style={{ top: `${mem.top}%`, height: `${mem.height}%` }}
+              onClick={() => talkMember(i)}
+              aria-label={`Tocar a ${mem.name}`}
+            />
+          ))}
+        </div>
+      ) : messages || rock ? (
+        <button
+          type="button"
+          className="char-btn"
+          onClick={() => {
+            talk()
+            if (rock) setRockKey((k) => k + 1)
+          }}
+          aria-label="Tocar al personaje"
+        >
           {img}
         </button>
       ) : (
         img
       )}
+      {rock && rockKey > 0 && (
+        <span className="sea" key={`sea${rockKey}`} aria-hidden="true">
+          <svg className="wave wave-back" viewBox="0 0 200 40" preserveAspectRatio="none">
+            <path d="M0 14Q12.5 0 25 14T50 14T75 14T100 14T125 14T150 14T175 14T200 14V40H0Z" />
+          </svg>
+          <svg className="wave wave-front" viewBox="0 0 200 40" preserveAspectRatio="none">
+            <path d="M0 14Q12.5 0 25 14T50 14T75 14T100 14T125 14T150 14T175 14T200 14V40H0Z" />
+          </svg>
+        </span>
+      )}
       {msg && (
-        <div className={`char-bubble${leaving ? ' leaving' : ''}`} key={msg.key} role="status">
+        <div
+          className={`char-bubble${leaving ? ' leaving' : ''}${members ? ' member-bubble' : ''}`}
+          style={members ? { top: `${members[msg.who].top + members[msg.who].height / 2}%` } : undefined}
+          key={msg.key}
+          role="status"
+        >
           {msg.text}
         </div>
       )}
@@ -172,6 +273,7 @@ function Page({ page, lastPage }) {
         </Fragment>
       ))}
       {page.footer && (
+        <div className="finale">
         <footer className="menu-footer">
           <svg className="cloud-bg" viewBox="0 0 300 130" preserveAspectRatio="none" aria-hidden="true">
             <path d="M60 108C20 108 10 70 42 62C38 28 90 18 108 42C125 8 190 8 205 40C235 22 285 42 262 74C300 85 280 118 245 108C225 126 185 124 170 108C150 126 105 124 92 108C80 118 70 114 60 108Z" />
@@ -179,6 +281,8 @@ function Page({ page, lastPage }) {
           <p>{page.footer[0]}</p>
           <strong>{page.footer[1]}</strong>
         </footer>
+        <img className="finale-img" src="/personajes/final.png" alt="" loading="lazy" />
+        </div>
       )}
     </div>
   )
