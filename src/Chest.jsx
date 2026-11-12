@@ -141,9 +141,11 @@ export function FloatingChest({ box }) {
     document.addEventListener('keydown', onKey)
     const prev = document.body.style.overflow
     document.body.style.overflow = 'hidden'
+    document.body.classList.add('modal-open')
     return () => {
       document.removeEventListener('keydown', onKey)
       document.body.style.overflow = prev
+      document.body.classList.remove('modal-open')
     }
   }, [open, close])
 
