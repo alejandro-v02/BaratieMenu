@@ -292,11 +292,17 @@ const MIN_SPLASH = 2200
 
 function Splash({ leaving, onDone }) {
   useEffect(() => {
-    const img = new Promise((res) => {
-      const im = new Image()
-      im.onload = im.onerror = res
-      im.src = '/fondo.jpg'
-    })
+    // se espera a que carguen la imagen de carga y el fondo del menú
+    const img = Promise.all(
+      ['/carga.jpg', '/fondo.jpg'].map(
+        (src) =>
+          new Promise((res) => {
+            const im = new Image()
+            im.onload = im.onerror = res
+            im.src = src
+          }),
+      ),
+    )
     const fonts = document.fonts?.ready ?? Promise.resolve()
     const wait = new Promise((res) => setTimeout(res, MIN_SPLASH))
     Promise.all([img, fonts, wait]).then(onDone)
@@ -304,15 +310,18 @@ function Splash({ leaving, onDone }) {
 
   return (
     <div className={`splash${leaving ? ' leaving' : ''}`} role="status" aria-label="Cargando">
-      <div className="splash-roger">
-        <JollyRoger size={120} />
+      <div className="splash-half left">
+        <div className="splash-img" />
       </div>
-      <h1>BARATIE</h1>
-      <h3>El Rey Pirata</h3>
-      <div className="bar" style={{ '--t': `${MIN_SPLASH}ms` }}>
-        <i />
+      <div className="splash-half right">
+        <div className="splash-img" />
       </div>
-      <p className="loading">Cargando</p>
+      <div className="splash-ui">
+        <div className="bar" style={{ '--t': `${MIN_SPLASH}ms` }}>
+          <i />
+        </div>
+        <p className="loading">Cargando</p>
+      </div>
     </div>
   )
 }
@@ -324,7 +333,7 @@ export default function App() {
 
   useEffect(() => {
     if (phase !== 'leaving') return
-    const t = setTimeout(() => setPhase('done'), 800)
+    const t = setTimeout(() => setPhase('done'), 1150)
     return () => clearTimeout(t)
   }, [phase])
 

@@ -528,3 +528,42 @@
 
 /* la colita del globo final baja hasta tocar la nube */
 .finale .menu-footer::after { bottom: -13px; }
+
+/* pantalla de carga: la imagen completa y, abajo, la barra de carga */
+.splash {
+  background: url('/carga.jpg') center / cover no-repeat, #d8bd8a;
+  justify-content: flex-end; gap: 10px; padding-bottom: max(40px, 9vh);
+}
+.splash .loading { color: #fff6dc; -webkit-text-stroke: 4px #1a0d05; paint-order: stroke fill; text-shadow: 2px 2px 0 #1a0d05; }
+
+/* ===== pantalla de carga con telón: al terminar, la imagen se parte y se abre hacia los lados ===== */
+.splash { display: block; padding: 0; background: none; transition: none; }
+.splash.leaving { opacity: 1; pointer-events: none; }
+.splash-half {
+  position: absolute; top: 0; bottom: 0; width: 50%; overflow: hidden; z-index: 1; will-change: transform;
+  transition: transform 1s cubic-bezier(.77, 0, .2, 1);
+}
+.splash-half.left { left: 0; }
+.splash-half.right { right: 0; }
+.splash-img { position: absolute; top: 0; bottom: 0; width: 100vw; background: url('/carga.jpg') center / cover no-repeat, #d8bd8a; }
+.splash-half.left .splash-img { left: 0; }
+.splash-half.right .splash-img { right: 0; }
+/* un borde con sombra en el centro para que parezcan dos telas */
+.splash-half::after { content: ''; position: absolute; top: 0; bottom: 0; width: 14px; }
+.splash-half.left::after { right: 0; background: linear-gradient(90deg, transparent, rgba(20, 8, 2, .55)); }
+.splash-half.right::after { left: 0; background: linear-gradient(270deg, transparent, rgba(20, 8, 2, .55)); }
+.splash.leaving .splash-half.left { transform: translateX(-104%); }
+.splash.leaving .splash-half.right { transform: translateX(104%); }
+/* la barra y el texto se van antes de que se abra el telón */
+.splash-ui {
+  position: absolute; left: 0; right: 0; bottom: max(40px, 9vh); z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 10px;
+  transition: opacity .25s ease;
+}
+.splash.leaving .splash-ui { opacity: 0; }
+/* la carta aparece suave mientras el telón se abre */
+.app { animation: app-in 1s ease-out .1s both; }
+@keyframes app-in { from { opacity: 0; transform: translateY(18px); } }
+
+/* el borde de sombra del centro solo se ve mientras el telón se abre (así no se nota una línea mientras carga) */
+.splash-half::after { opacity: 0; transition: opacity .2s ease; }
+.splash.leaving .splash-half::after { opacity: 1; }
