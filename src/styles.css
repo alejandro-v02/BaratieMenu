@@ -567,3 +567,12 @@
 /* el borde de sombra del centro solo se ve mientras el telón se abre (así no se nota una línea mientras carga) */
 .splash-half::after { opacity: 0; transition: opacity .2s ease; }
 .splash.leaving .splash-half::after { opacity: 1; }
+
+/* pantalla de carga adaptable: la imagen se ve completa (sin estirarla ni recortarla) y el resto se rellena con una copia desenfocada */
+.splash-img { background: #b9975a; overflow: hidden; }
+.splash-img::before, .splash-img::after { content: ''; position: absolute; inset: 0; background-repeat: no-repeat; background-position: center; }
+.splash-img::before { background-image: url('/carga.jpg'); background-size: cover; filter: blur(16px) brightness(.85) saturate(1.1); transform: scale(1.15); }
+.splash-img::after { background-image: url('/carga.jpg'); background-size: contain; }
+
+/* el relleno de los lados es el mapa del menú oscurecido, sin la imagen borrosa */
+.splash-img::before { background-image: url('/fondo.jpg'); filter: brightness(.7); transform: none; }
