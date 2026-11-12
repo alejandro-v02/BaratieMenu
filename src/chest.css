@@ -215,3 +215,10 @@ body.modal-open .app *, body.modal-open .chest-fab, body.modal-open .chest-fab *
 .reward-price b { animation: none; }
 .reward-price::after { display: none; }
 @keyframes price-stamp { from { opacity: 0; transform: scale(1.7); } to { opacity: 1; transform: none; } }
+
+/* frase de la cajita sorpresa */
+.mystery-tagline {
+  margin-top: -4px; font-family: Caveat, cursive; font-weight: 700; font-size: 1.7rem; line-height: 1.05; text-align: center; color: #fff0a8;
+  -webkit-text-stroke: 4px #1a0d05; paint-order: stroke fill; text-shadow: 2px 2px 0 #1a0d05; padding: 0 12px;
+}
+.reward-tagline { font-family: Caveat, cursive; font-weight: 700; font-size: 1.6rem; line-height: 1.05; color: #1d5c6b; margin: 2px 0 2px; }

@@ -171,6 +171,7 @@ export function FloatingChest({ box }) {
           {stage !== 'cards' ? (
             <div className="chest-stage" onClick={(e) => e.stopPropagation()}>
               <h3 className="mystery-title">CAJITA SORPRESA</h3>
+              <p className="mystery-tagline">{box.tagline}</p>
               <button type="button" className={`big-chest${stage === 'opening' ? ' opening' : ''}`} onClick={startOpening} aria-label="Abrir el cofre">
                 <Chest open={stage === 'opening'} />
                 {stage === 'opening' && (
@@ -189,6 +190,7 @@ export function FloatingChest({ box }) {
               <div className="pennant pennant-title reward-ribbon">
                 <h2>Tu recompensa</h2>
               </div>
+              <p className="reward-tagline">{box.tagline}</p>
               <p className="reward-hint">{box.hint}</p>
               <div className="mystery-cards">
                 {box.items.map((it, i) => (

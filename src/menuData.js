@@ -203,6 +203,7 @@ const helados = {
 // Cofre flotante: siempre visible abajo; al tocarlo abre el modal con lo que trae la cajita
 export const mysteryBox = {
   price: '25.000',
+  tagline: 'Pequeños piratas, grandes aventuras',
   hint: 'Toca cada carta para descubrir qué trae',
   messages: ['¡Cajita sorpresa!', '¿Qué traerá?', '¡Ábrela!', '¡Misterio por ฿25.000!'],
   items: [
