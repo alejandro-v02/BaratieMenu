@@ -5,11 +5,25 @@ const entradas = {
   title: 'Entradas',
   char: 1,
   charPeek: true,
-  charMessages: [
-    '¡Quiero carne!',
-    'Esto está bueno... ¿pero dónde está la salida?',
-    '¡La cocina del Baratie es mía!',
-    '¡Pidan sin miedo, nakamas!',
+  charMembers: [
+    {
+      name: 'Luffy',
+      top: 0,
+      height: 33,
+      messages: ['¡Quiero carne!', '¡Quiero otra hamburguesa!', '¡Voy a ser el Rey de los Piratas... y el rey del menú!'],
+    },
+    {
+      name: 'Zoro',
+      top: 33,
+      height: 31,
+      messages: ['Esto está bueno... ¿pero dónde está la salida?', '¿Alguien vio mi cerveza?', '¡No me perdí, la mesa se movió!'],
+    },
+    {
+      name: 'Sanji',
+      top: 64,
+      height: 36,
+      messages: ['¡La cocina del Baratie es mía!', '¡Aquí nadie desperdicia comida!', '¡Una dama merece lo mejor del menú!'],
+    },
   ],
   noBadge: true,
   icon: 'empanada',
@@ -50,6 +64,9 @@ const otras = {
   title: 'Otras Delicias',
   photo: '/personajes/otras-delicias.png',
   char: 2,
+  charWide: true,
+  charRock: true,
+  stretchFirst: true,
   icon: 'chest',
   quote: 'Sabores de otro mundo',
   items: [
@@ -99,6 +116,7 @@ const sodas = {
   char: 4,
   charBubble: 'top',
   charShout: true,
+  stretchFirst: 2,
   charMessages: [
     '¡QUIERO UNA SODA!',
     '¡SOY UN RENO, NO UN MAPACHE!',
@@ -118,8 +136,39 @@ const sodas = {
 const granizados = {
   title: 'Granizados',
   photo: '/personajes/granizados.jpg',
-  char: 5,
-  charBelow: true,
+  group: {
+    src: '/personajes/personaje-5.png',
+    members: [
+      {
+        name: 'Inosuke',
+        left: 0,
+        width: 31,
+        align: 'left',
+        messages: ['¡Tráiganme comida o los reto a un duelo!', '¡Yo pedí primero!', '¡Soy el rey de la montaña... y de la carta!'],
+      },
+      {
+        name: 'Tanjiro',
+        left: 31,
+        width: 25,
+        align: 'center',
+        messages: ['¡Gracias por la comida!', '¡Con esfuerzo todo sabe más rico!', '¡Un granizado para recuperar fuerzas!'],
+      },
+      {
+        name: 'Nezuko',
+        left: 56,
+        width: 17,
+        align: 'center',
+        messages: ['¡Mmh! ¡Mmmh!', '¡Mmh mmh mmh!'],
+      },
+      {
+        name: 'Zenitsu',
+        left: 73,
+        width: 27,
+        align: 'right',
+        messages: ['¡Quiero un granizado, ya!', '¡Tengo miedo... pero tengo hambre!', '¡Con esto sí me hago fuerte!'],
+      },
+    ],
+  },
   icon: 'ice',
   quote: 'Primera postura, concentración total para tu sed',
   items: [
