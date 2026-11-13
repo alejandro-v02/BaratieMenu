@@ -600,3 +600,67 @@
 
 /* el barco un poco más abajo para no rozar la tarjeta de la choripapa */
 .has-char.char-wide .section-char { bottom: -32px; }
+
+/* ===== Obanai y Mitsuri ===== */
+.has-duo { --cw: clamp(110px, 40vw, 156px); }
+.section-char.char-duo { width: var(--cw); height: min(250px, 78%); pointer-events: auto; bottom: 0; }
+.has-duo.side-left .section-char.char-duo { right: -4px; left: auto; }
+.has-duo.side-right .section-char.char-duo { left: -4px; right: auto; }
+.duo-btn { all: unset; position: absolute; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.duo-btn img { display: block; width: 100%; height: auto; filter: drop-shadow(2px 2px 0 var(--ink)); }
+.duo-mitsuri { top: 0; right: 2%; width: 78%; z-index: 2; }
+.duo-obanai { bottom: 0; left: 0; width: 52%; z-index: 1; }
+.has-duo.side-right .duo-mitsuri { right: auto; left: 2%; }
+.has-duo.side-right .duo-obanai { left: auto; right: 0; }
+/* Mitsuri: flota despacio y al tocarla cae y rebota */
+.duo-mitsuri img { transform-origin: 50% 60%; animation: mitsuri-float 3.2s ease-in-out infinite alternate; }
+@keyframes mitsuri-float { from { transform: translateY(0) rotate(-3deg); } to { transform: translateY(6px) rotate(3deg); } }
+/* globo encima de cada personaje */
+.duo-bubble { top: auto; right: auto; bottom: calc(100% + 4px); max-width: 190px; z-index: 6; }
+.has-duo.side-left .duo-bubble { right: 0; }
+.has-duo.side-right .duo-bubble { left: 0; }
+.duo-bubble::after { top: auto; bottom: -9px; border-top: 0; border-right: 2.5px solid var(--ink); border-bottom: 2.5px solid var(--ink); }
+.has-duo.side-left .duo-bubble.who-mitsuri::after { right: 44px; }
+.has-duo.side-left .duo-bubble.who-obanai::after { right: 110px; }
+.has-duo.side-right .duo-bubble.who-mitsuri::after { right: auto; left: 44px; }
+.has-duo.side-right .duo-bubble.who-obanai::after { right: auto; left: 20px; }
+
+/* el globo entra dentro de la columna (sobre la cabeza de Mitsuri) para no tapar el banderín de arriba; Obanai un poco más grande */
+.duo-bubble { bottom: auto; top: 2px; max-width: 150px; }
+.duo-obanai { width: 60%; }
+.duo-bubble::after { bottom: -9px; top: auto; }
+
+/* Obanai a la derecha de Mitsuri, mirando hacia ella; el par ya no queda pegado al borde de la pantalla */
+.section-char.char-duo.char-left { left: 12px; right: auto; }
+.section-char.char-duo.char-right { right: 12px; left: auto; }
+.has-duo .duo-mitsuri { left: 0; right: auto; top: 0; width: 74%; }
+.has-duo .duo-obanai { right: 0; left: auto; bottom: 0; width: 60%; }
+.has-duo .duo-obanai img { transform: scaleX(-1); }
+.has-duo .duo-bubble { left: 0; right: auto; }
+.has-duo .duo-bubble.who-mitsuri::after { left: 38px; right: auto; }
+.has-duo .duo-bubble.who-obanai::after { left: auto; right: 34px; }
+
+/* mismo lado de antes, con los dos personajes girados: Mitsuri (izquierda) y Obanai (derecha) se miran de frente */
+.has-duo .duo-mitsuri img { transform-origin: 50% 60%; }
+.has-duo .duo-obanai img { transform: none; }
+.duo-mitsuri img { animation-name: mitsuri-float-flip; }
+@keyframes mitsuri-float-flip { from { transform: scaleX(-1) translateY(0) rotate(-3deg); } to { transform: scaleX(-1) translateY(6px) rotate(3deg); } }
+
+/* Obanai pegado al borde de la pantalla (mirando hacia Mitsuri) y ella a su lado */
+.has-duo .section-char.char-duo.char-left { left: -6px; right: auto; }
+.has-duo .duo-obanai { left: 0; right: auto; }
+.has-duo .duo-mitsuri { right: 0; left: auto; }
+.has-duo .duo-obanai img { transform: scaleX(-1); }
+.has-duo .duo-bubble.who-obanai::after { left: 40px; right: auto; }
+.has-duo .duo-bubble.who-mitsuri::after { left: auto; right: 52px; }
+.section.has-duo .section-char.char-duo .duo-obanai { left: 0; right: auto; bottom: 0; width: 60%; }
+.section.has-duo .section-char.char-duo .duo-mitsuri { right: 0; left: auto; top: 0; width: 74%; }
+.section.has-duo .section-char.char-duo .duo-obanai img { transform: none; }
+
+/* globos alineados: el de Mitsuri encima de ella y el de Obanai delante de su boca, con la colita apuntándola */
+.section.has-duo .duo-bubble.who-mitsuri { top: auto; bottom: calc(100% - 2px); left: auto; right: 0; max-width: 160px; }
+.section.has-duo .duo-bubble.who-mitsuri::after { top: auto; bottom: -9px; left: auto; right: 50px; border-top: 0; border-left: 0; border-right: 2.5px solid var(--ink); border-bottom: 2.5px solid var(--ink); }
+.section.has-duo .duo-bubble.who-obanai { top: auto; bottom: 74px; left: 74px; right: auto; max-width: 150px; }
+.section.has-duo .duo-bubble.who-obanai::after {
+  top: auto; bottom: 14px; left: -9px; right: auto; border: 0; border-left: 2.5px solid var(--ink); border-bottom: 2.5px solid var(--ink);
+}

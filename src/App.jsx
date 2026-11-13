@@ -75,8 +75,9 @@ function CharGroup({ group }) {
 
 function Section({ section }) {
   return (
-    <section className={`section side-${sides[section.title]}${section.char && !section.charBelow ? ' has-char' : ''}${section.charPeek ? ' has-peek' : ''}${section.charWide ? ' char-wide' : ''}${section.stretchFirst ? ` stretch-first stretch-${Number(section.stretchFirst)}` : ''}`}>
-      {section.char && !section.charBelow && <Character n={section.char} peek={section.charPeek} messages={section.charMessages} members={section.charMembers} rock={section.charRock} bubble={section.charBubble} shout={section.charShout} side={sides[section.title] === 'left' ? 'right' : 'left'} />}
+    <section className={`section side-${sides[section.title]}${section.char && !section.charBelow ? ' has-char' : ''}${section.charDuo ? ` has-duo duo-${section.charSide || 'auto'}` : ''}${section.charPeek ? ' has-peek' : ''}${section.charWide ? ' char-wide' : ''}${section.stretchFirst ? ` stretch-first stretch-${Number(section.stretchFirst)}` : ''}`}>
+      {section.char && section.charDuo && <CharDuo duo={section.charDuo} side={section.charSide || (sides[section.title] === 'left' ? 'right' : 'left')} />}
+      {section.char && !section.charBelow && !section.charDuo && <Character n={section.char} peek={section.charPeek} messages={section.charMessages} members={section.charMembers} rock={section.charRock} bubble={section.charBubble} shout={section.charShout} side={sides[section.title] === 'left' ? 'right' : 'left'} />}
       <div className="section-head">
         {!section.noBadge && <Badge icon={section.icon} photo={section.photo} pop={section.pop} size={136} />}
         <div className="banners">
@@ -156,6 +157,46 @@ function Divider() {
 
 // Personaje recortado (PNG sin fondo) junto a las tarjetas de una sección.
 // Coloca las imágenes en public/personajes/personaje-1.png ... personaje-6.png
+// Obanai y Mitsuri: ella flota y los dos dicen frases propias al tocarlos
+function CharDuo({ duo, side }) {
+  const [msg, setMsg] = useState(null) // { who, text, key }
+  const [leaving, setLeaving] = useState(false)
+  const [counts, setCounts] = useState({ obanai: 0, mitsuri: 0 })
+
+  const talk = (who) => {
+    const list = duo[who].messages
+    setMsg({ who, text: list[counts[who] % list.length], key: Date.now() })
+    setCounts((c) => ({ ...c, [who]: c[who] + 1 }))
+    setLeaving(false)
+  }
+
+  useEffect(() => {
+    if (!msg) return
+    const fade = setTimeout(() => setLeaving(true), 2600)
+    const done = setTimeout(() => setMsg(null), 3000)
+    return () => {
+      clearTimeout(fade)
+      clearTimeout(done)
+    }
+  }, [msg])
+
+  return (
+    <div className={`section-char char-${side} char-duo`}>
+      <button type="button" className="duo-btn duo-mitsuri" onClick={() => talk('mitsuri')} aria-label="Tocar a Mitsuri">
+        <img src={duo.mitsuri.src} alt="" loading="lazy" />
+      </button>
+      <button type="button" className="duo-btn duo-obanai" onClick={() => talk('obanai')} aria-label="Tocar a Obanai">
+        <img src={duo.obanai.src} alt="" loading="lazy" />
+      </button>
+      {msg && (
+        <div className={`char-bubble duo-bubble who-${msg.who}${leaving ? ' leaving' : ''}`} key={msg.key} role="status">
+          {msg.text}
+        </div>
+      )}
+    </div>
+  )
+}
+
 function Character({ n, side, peek, messages, members, bubble, shout, rock }) {
   const [missing, setMissing] = useState(false)
   const [msg, setMsg] = useState(null) // { text, key }

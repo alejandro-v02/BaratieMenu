@@ -195,6 +195,10 @@ const malteadas = {
   title: 'Malteadas',
   photo: '/personajes/malteadas.jpg',
   char: 6,
+  charDuo: {
+    obanai: { src: '/personajes/obanai.png', messages: ['...Mitsuri.', '¡Cuidado! ¡Te vas a caer!', 'Qué torpe... pero qué tierna.'] },
+    mitsuri: { src: '/personajes/mitsuri.png', messages: ['¡Kyaa! ¡Me caigooo!', '¡Obanai-san, sálvame!', '¡Esta malteada me hizo volar!'] },
+  },
   icon: 'shake',
   quote: 'Ricas y cremosas, preparadas por el gremio de cazadores',
   items: [
