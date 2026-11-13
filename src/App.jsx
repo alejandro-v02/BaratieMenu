@@ -321,6 +321,7 @@ function Splash({ leaving, onDone }) {
         <div className="splash-img" />
       </div>
       <div className="splash-ui">
+        <p className="splash-tagline">El sabor de un verdadero Pirata</p>
         <div className="bar" style={{ '--t': `${MIN_SPLASH}ms` }}>
           <i />
         </div>

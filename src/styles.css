@@ -580,3 +580,9 @@
 /* la colita del globo apunta al personaje exacto (lados) */
 .group-bubble.align-left::after { left: calc(var(--tl, 36px) - 7px); }
 .group-bubble.align-right::after { left: auto; right: calc(var(--tr, 36px) - 7px); }
+
+/* frase sobre la barra de carga */
+.splash-tagline {
+  margin: 0 0 4px; padding: 0 16px; text-align: center; font-family: 'Caveat', cursive; font-weight: 700; font-size: clamp(1.5rem, 7vw, 2rem); line-height: 1.05;
+  color: #fff6dc; -webkit-text-stroke: 5px #1a0d05; paint-order: stroke fill; text-shadow: 2px 3px 0 #1a0d05;
+}
