@@ -78,7 +78,7 @@ const otras = {
   char: 2,
   charWide: true,
   charRock: true,
-  stretchFirst: true,
+  stretchFirst: 2,
   icon: 'chest',
   quote: 'Sabores de otro mundo',
   items: [

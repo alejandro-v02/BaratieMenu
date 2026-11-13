@@ -594,3 +594,9 @@
 .has-char .item-level .item-top { flex-wrap: nowrap; align-items: flex-end; }
 .has-char .item-level .name-chip { min-width: 0; }
 .has-char .item-level .price { flex: none; }
+
+/* Otras Delicias: la picada y la choripapa ocupan todo el ancho; solo las papas quedan junto al barco */
+.has-char.stretch-first.char-wide.stretch-2 .item:nth-child(-n+2) { width: 100%; margin-left: 0; margin-right: 0; padding-left: 0; padding-right: 0; }
+
+/* el barco un poco más abajo para no rozar la tarjeta de la choripapa */
+.has-char.char-wide .section-char { bottom: -32px; }
