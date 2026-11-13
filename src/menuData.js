@@ -197,7 +197,11 @@ const malteadas = {
   char: 6,
   icon: 'shake',
   quote: 'Ricas y cremosas, preparadas por el gremio de cazadores',
-  items: [{ name: 'Malteada del gremio', price: '15.000' }],
+  items: [
+    { name: 'Nezuko', tag: 'Chocolate', price: '15.000' },
+    { name: 'Rengoku', tag: 'Caramelo', price: '15.000' },
+    { name: 'Shinobu', tag: 'Mora', price: '15.000' },
+  ],
 }
 
 const helados = {
