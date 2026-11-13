@@ -1,4 +1,4 @@
-import { Fragment, useCallback, useEffect, useState } from 'react'
+import { Fragment, useCallback, useEffect, useRef, useState } from 'react'
 import { pages, mysteryBox } from './menuData'
 import Badge, { JollyRoger } from './Badge'
 import { FloatingChest } from './Chest'
@@ -21,10 +21,14 @@ function CharGroup({ group }) {
   const [counts, setCounts] = useState(() => group.members.map(() => 0))
   const [msg, setMsg] = useState(null) // { who, text, key }
   const [leaving, setLeaving] = useState(false)
+  const boxRef = useRef(null)
 
   const talk = (i) => {
     const list = group.members[i].messages
-    setMsg({ who: i, text: list[counts[i] % list.length], key: Date.now() })
+    const mem = group.members[i]
+    const w = boxRef.current ? boxRef.current.offsetWidth : 360
+    const cx = ((mem.left + mem.width / 2) / 100) * w // centro del personaje en px
+    setMsg({ who: i, text: list[counts[i] % list.length], key: Date.now(), tl: cx, tr: w - cx })
     setCounts((c) => c.map((n, k) => (k === i ? n + 1 : n)))
     setLeaving(false)
   }
@@ -43,7 +47,7 @@ function CharGroup({ group }) {
   const center = who ? who.left + who.width / 2 : 0
 
   return (
-    <div className="char-group">
+    <div className="char-group" ref={boxRef}>
       <img src={group.src} alt="" loading="lazy" />
       {group.members.map((mem, i) => (
         <button
@@ -60,7 +64,7 @@ function CharGroup({ group }) {
           key={msg.key}
           role="status"
           className={`char-bubble group-bubble align-${who.align}${leaving ? ' leaving' : ''}`}
-          style={{ '--cx': `${center}%` }}
+          style={{ '--cx': `${center}%`, '--tl': `${msg.tl}px`, '--tr': `${msg.tr}px` }}
         >
           {msg.text}
         </div>

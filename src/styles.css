@@ -576,3 +576,7 @@
 
 /* el relleno de los lados es el mapa del menú oscurecido, sin la imagen borrosa */
 .splash-img::before { background-image: url('/fondo.jpg'); filter: brightness(.7); transform: none; }
+
+/* la colita del globo apunta al personaje exacto (lados) */
+.group-bubble.align-left::after { left: calc(var(--tl, 36px) - 7px); }
+.group-bubble.align-right::after { left: auto; right: calc(var(--tr, 36px) - 7px); }

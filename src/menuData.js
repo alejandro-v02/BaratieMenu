@@ -37,7 +37,19 @@ const entradas = {
 const hamburguesas = {
   title: 'Hamburguesas',
   photo: '/personajes/hamburguesas.jpg',
-  strip: '/personajes/tripulacion.png',
+  group: {
+    src: '/personajes/tripulacion.png',
+    members: [
+      { name: 'Luffy', left: 0, width: 15, align: 'left', messages: ['¡Quiero carne!', '¡Voy a ser el Rey de los Piratas!', '¡Sanji, tengo hambre!'] },
+      { name: 'Zoro', left: 15, width: 12.5, align: 'left', messages: ['No me perdí... ¡el camino se movió!', '¿Hay sake por aquí?', 'Nada de esto me da miedo.'] },
+      { name: 'Nami', left: 27.5, width: 12.5, align: 'center', messages: ['¡Eso les costará dinero!', '¡Nadie se pasa de la cuenta!', 'Las naranjas y los mapas son míos.'] },
+      { name: 'Usopp', left: 40, width: 10.5, align: 'center', messages: ['¡Una vez me comí mil hamburguesas yo solo!', '¡Soy el valiente capitán Usopp!', 'Me da miedo... ¡pero no importa!'] },
+      { name: 'Sanji', left: 50.5, width: 11.5, align: 'center', messages: ['¡Un cocinero cocina con amor!', 'Nadie desperdicia mi comida.', '¡Nami-swan, Robin-chwan!'] },
+      { name: 'Chopper', left: 62, width: 14.5, align: 'center', messages: ['¡No me hace feliz, idiota!', '¡Soy un doctor, no una mascota!', '¡Quiero algodón de azúcar!'] },
+      { name: 'Robin', left: 76.5, width: 11.5, align: 'right', messages: ['Qué plato tan interesante... fufufu.', '¿Me traen un café, por favor?', 'Me gusta este lugar.'] },
+      { name: 'Franky', left: 88, width: 12, align: 'right', messages: ['¡SUUUPER!', '¡Esta carta es súper!', '¡Necesito una cola!'] },
+    ],
+  },
   icon: 'burger',
   quote: 'Rangos de poder',
   items: [
