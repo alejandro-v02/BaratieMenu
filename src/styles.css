@@ -586,3 +586,11 @@
   margin: 0 0 4px; padding: 0 16px; text-align: center; font-family: 'Caveat', cursive; font-weight: 700; font-size: clamp(1.5rem, 7vw, 2rem); line-height: 1.05;
   color: #fff6dc; -webkit-text-stroke: 5px #1a0d05; paint-order: stroke fill; text-shadow: 2px 3px 0 #1a0d05;
 }
+
+/* tarjetas con descripción pero sin banderín (Otras Delicias): sin el hueco de la cinta */
+.item-level.no-rank .item-bottom { padding-left: 16px; min-height: 0; padding-top: 16px; padding-bottom: 10px; }
+
+/* en las tarjetas angostas (junto a un personaje) el nombre baja de línea dentro de su etiqueta y el precio se queda a su lado */
+.has-char .item-level .item-top { flex-wrap: nowrap; align-items: flex-end; }
+.has-char .item-level .name-chip { min-width: 0; }
+.has-char .item-level .price { flex: none; }

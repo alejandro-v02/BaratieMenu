@@ -93,7 +93,7 @@ function Section({ section }) {
       {section.items && (
         <ul className="items">
           {section.items.map((it) => (
-            <li className={`item${it.desc ? ' item-level' : ''}`} key={it.name}>
+            <li className={`item${it.desc ? ' item-level' : ''}${it.desc && !(it.rank || it.tag) ? ' no-rank' : ''}`} key={it.name}>
               {it.desc ? (
                 <>
                   <div className="item-top">
@@ -101,10 +101,10 @@ function Section({ section }) {
                     <span className="price">{berry(it.price)}</span>
                   </div>
                   <div className="item-bottom">
-                    {it.tag && (
+                    {(it.rank || it.tag) && (
                       <span className="pennant level-pennant">
-                        <span>{it.tag.split(' ')[0]}</span>
-                        <b>{it.tag.split(' ').slice(1).join(' ')}</b>
+                        <span>{it.rank ? it.rank[0] : it.tag.split(' ')[0]}</span>
+                        <b>{it.rank ? it.rank[1] : it.tag.split(' ').slice(1).join(' ')}</b>
                       </span>
                     )}
                     <p className="item-desc">{it.desc}</p>

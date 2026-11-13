@@ -66,9 +66,9 @@ const hotdogs = {
   icon: 'hotdog',
   quote: 'Cazadores Legendarios',
   items: [
-    { tag: 'Primera Luna', name: 'Kimetsu Clásico', price: '15.000' },
-    { tag: 'Segunda Luna', name: 'Pilar de la Brasa', price: '18.000' },
-    { tag: 'Tercera Luna', name: 'Especial Luna Superior', price: '22.000' },
+    { rank: ['Luna', '1'], name: 'Kimetsu Clásico', desc: 'Pan artesanal, salchicha americana, ripio de papa, queso gratinado, cebolla caramelizada y salsa de la casa.', price: '15.000' },
+    { rank: ['Luna', '2'], name: 'Pilar de la Brasa', desc: 'Pan artesanal, chorizo, ripio de papa, queso gratinado, cebolla caramelizada y salsa de la casa.', price: '18.000' },
+    { rank: ['Luna', '3'], name: 'Especial Luna Superior', desc: 'Pan artesanal, salchicha americana, ripio de papa, cebolla, queso gratinado y salsa de la casa.', price: '22.000' },
   ],
 }
 
@@ -82,9 +82,9 @@ const otras = {
   icon: 'chest',
   quote: 'Sabores de otro mundo',
   items: [
-    { name: 'Picada banquete pirata', price: '38.000' },
-    { name: 'Choripapa Rey Pirata', price: '25.000' },
-    { name: 'Papas la Gran Ruta', price: '25.000' },
+    { name: 'Picada banquete pirata', desc: 'Para compartir: carne, chorizo, pollo, papas criollas, arepitas y las salsas de la casa.', price: '38.000' },
+    { name: 'Choripapa Rey Pirata', desc: 'Chorizo sobre papas crocantes con queso gratinado y salsa de la casa.', price: '25.000' },
+    { name: 'Papas la Gran Ruta', desc: 'Papas crocantes con queso, tocineta, cebolla caramelizada y salsa de la casa.', price: '25.000' },
   ],
 }
 
