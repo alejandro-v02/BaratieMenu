@@ -53,7 +53,7 @@ const hamburguesas = {
   icon: 'burger',
   quote: 'Rangos de poder',
   items: [
-    { tag: 'Nivel 1', name: 'Baratie Sencilla', desc: 'Pan artesanal, 150 g de carne, queso, lechuga, tomate y salsa de la casa.', price: '18.000' },
+    { tag: 'Nivel 1', name: 'Baratie Sencilla', desc: 'Pan artesanal, 180 gr de carne, cebolla caramelizada, queso, vegetales, salsa de la casa.', price: '18.000' },
     { tag: 'Nivel 2', name: 'Nakama Doble', desc: 'Pan artesanal, doble carne de 150 g, doble queso, cebolla caramelizada, vegetales y salsa de la casa.', price: '26.000' },
     { tag: 'Nivel 3', name: 'Luffy Burger', desc: 'Pan artesanal, 180 g de carne, queso gratinado, jamón, huevo, vegetales y salsa de la casa.', price: '26.000' },
     { tag: 'Nivel 4', name: 'Monkey D. Queso', desc: 'Pan artesanal, 180 g de carne, triple queso gratinado, tocineta crocante, cebolla caramelizada y salsa de la casa.', price: '28.000' },
