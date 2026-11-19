@@ -66,7 +66,7 @@ const hotdogs = {
   icon: 'hotdog',
   quote: 'Cazadores Legendarios',
   items: [
-    { rank: ['Luna', '1'], name: 'Kimetsu Clásico', desc: 'Pan artesanal, salchicha americana, ripio de papa, queso gratinado, cebolla caramelizada y salsa de la casa.', price: '15.000' },
+    { rank: ['Luna', '1'], name: 'Kimetsu Clásico', desc: 'Pan artesanal, salchicha americana, ripio de papa, queso, cebolla caramelizada, salsa de la casa', price: '15.000' },
     { rank: ['Luna', '2'], name: 'Pilar de la Brasa', desc: 'Pan artesanal, chorizo, ripio de papa, queso gratinado, cebolla caramelizada y salsa de la casa.', price: '18.000' },
     { rank: ['Luna', '3'], name: 'Especial Luna Superior', desc: 'Pan artesanal, salchicha americana, ripio de papa, cebolla, queso gratinado y salsa de la casa.', price: '22.000' },
   ],
