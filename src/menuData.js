@@ -83,7 +83,7 @@ const otras = {
   quote: 'Sabores de otro mundo',
   items: [
     { name: 'Picada banquete pirata', desc: 'Res, cerdo, pollo, maduro, papa a la francesa y salsa de guacamole', price: '38.000' },
-    { name: 'Choripapa Rey Pirata', desc: 'Chorizo sobre papas crocantes con queso gratinado y salsa de la casa.', price: '25.000' },
+    { name: 'Choripapa Rey Pirata', desc: 'Chorizo, papa a la francesa, carne desmechada, queso gratinado y salsa de la casa', price: '25.000' },
     { name: 'Papas la Gran Ruta', desc: 'Papas crocantes con queso, tocineta, cebolla caramelizada y salsa de la casa.', price: '25.000' },
   ],
 }
