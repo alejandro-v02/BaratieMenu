@@ -175,7 +175,14 @@ export function FloatingChest({ box }) {
 
   return (
     <>
-      <button type="button" className="chest-fab" onClick={openModal} aria-label="Abrir la cajita sorpresa">
+      <button
+        type="button"
+        className="chest-fab"
+        onClick={openModal}
+        aria-label="Abrir la cajita sorpresa"
+        aria-haspopup="dialog"
+        aria-expanded={open}
+      >
         <span className="fab-aura" />
         <span className={`chest-msg${showMsg && !open ? ' on' : ''}`}>{box.messages[idx % box.messages.length]}</span>
         <span className="coin c1" />
