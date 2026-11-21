@@ -18,15 +18,20 @@ body {
 }
 button { font: inherit; cursor: pointer; border: 0; background: none; }
 
-/* que el teléfono no seleccione ni copie textos, números o imágenes al tocar o mantener presionado */
-html, body, #root, #root * {
+/* evita arrastrar ilustraciones y seleccionar etiquetas de controles al tocarlos */
+img, svg, button {
   -webkit-user-select: none;
   user-select: none;
   -webkit-touch-callout: none;
 }
 img, svg { -webkit-user-drag: none; user-drag: none; }
 body { touch-action: manipulation; }
-::selection { background: transparent; }
+::selection { background: rgba(224, 176, 96, .55); color: var(--ink); }
+
+button:focus-visible {
+  outline: 3px solid #1d5c6b;
+  outline-offset: 3px;
+}
 
 /* que ningún navegador oscurezca la carta por su cuenta (modo oscuro forzado de Samsung Internet, Chrome, etc.) */
 html, body, #root { color-scheme: only light; }
