@@ -85,6 +85,7 @@
   border: 2.5px solid #1a0d05; background: #f6ead2; color: #1a0d05; font-size: 1.7rem; line-height: 1; box-shadow: 2px 2px 0 #1a0d05; cursor: pointer;
 }
 .modal-close:hover { background: #e6cfa6; }
+.modal-close:active { transform: scale(.94); }
 .modal-close:focus-visible, .big-chest:focus-visible, .mcard:focus-visible, .modal-reveal:focus-visible {
   outline: 3px solid #1d5c6b;
   outline-offset: 4px;
