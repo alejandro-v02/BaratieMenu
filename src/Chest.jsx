@@ -98,7 +98,7 @@ export function FloatingChest({ box }) {
   const [open, setOpen] = useState(false)
   const [stage, setStage] = useState('closed') // closed -> opening -> cards
   const [flipped, setFlipped] = useState([])
-  const [idx, setIdx] = useState(0)
+  const [idx, setIdx] = useState(-1)
   const [showMsg, setShowMsg] = useState(false)
   const triggerRef = useRef(null)
   const modalRef = useRef(null)
