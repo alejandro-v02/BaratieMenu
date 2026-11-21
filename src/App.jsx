@@ -337,6 +337,8 @@ const MIN_SPLASH = 2200
 
 function Splash({ leaving, onDone }) {
   useEffect(() => {
+    let cancelled = false
+    let waitId
     // se espera a que carguen la imagen de carga y el fondo del menú
     const img = Promise.all(
       ['/carga.jpg', '/fondo.jpg'].map(
@@ -349,8 +351,16 @@ function Splash({ leaving, onDone }) {
       ),
     )
     const fonts = document.fonts?.ready ?? Promise.resolve()
-    const wait = new Promise((res) => setTimeout(res, MIN_SPLASH))
-    Promise.all([img, fonts, wait]).then(onDone)
+    const wait = new Promise((res) => {
+      waitId = setTimeout(res, MIN_SPLASH)
+    })
+    Promise.all([img, fonts, wait]).then(() => {
+      if (!cancelled) onDone()
+    })
+    return () => {
+      cancelled = true
+      clearTimeout(waitId)
+    }
   }, [onDone])
 
   return (
