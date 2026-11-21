@@ -33,6 +33,18 @@ button:focus-visible {
   outline-offset: 3px;
 }
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 /* que ningún navegador oscurezca la carta por su cuenta (modo oscuro forzado de Samsung Internet, Chrome, etc.) */
 html, body, #root { color-scheme: only light; }
 @media (prefers-color-scheme: dark) {

@@ -402,6 +402,7 @@ export default function App() {
           <div className="edge edge-top" aria-hidden="true" />
           <div className="edge edge-bottom" aria-hidden="true" />
           <main className="app">
+            <h1 className="sr-only">Carta de Baratie · El Rey Pirata</h1>
             {pages.map((p, i) => (
               <Page key={p.id} page={p} lastPage={i === pages.length - 1} />
             ))}
