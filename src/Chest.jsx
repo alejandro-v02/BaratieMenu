@@ -149,7 +149,9 @@ export function FloatingChest({ box }) {
       }
       if (e.key !== 'Tab') return
 
-      const focusable = modalRef.current?.querySelectorAll('button:not([disabled])')
+      const focusable = modalRef.current?.querySelectorAll(
+        'button:not([disabled]), a[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
+      )
       if (!focusable?.length) return
       const first = focusable[0]
       const last = focusable[focusable.length - 1]
