@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useId, useState } from 'react'
+import { useCallback, useEffect, useId, useRef, useState } from 'react'
 import Icon from './Icon'
 import './chest.css'
 
@@ -100,9 +100,13 @@ export function FloatingChest({ box }) {
   const [flipped, setFlipped] = useState([])
   const [idx, setIdx] = useState(0)
   const [showMsg, setShowMsg] = useState(false)
+  const triggerRef = useRef(null)
+  const modalRef = useRef(null)
+  const closeRef = useRef(null)
 
   const close = useCallback(() => setOpen(false), [])
   const openModal = () => {
+    triggerRef.current = document.activeElement
     setFlipped([])
     setStage('closed')
     setOpen(true)
@@ -137,7 +141,26 @@ export function FloatingChest({ box }) {
 
   useEffect(() => {
     if (!open) return
-    const onKey = (e) => e.key === 'Escape' && close()
+    closeRef.current?.focus()
+    const onKey = (e) => {
+      if (e.key === 'Escape') {
+        close()
+        return
+      }
+      if (e.key !== 'Tab') return
+
+      const focusable = modalRef.current?.querySelectorAll('button:not([disabled])')
+      if (!focusable?.length) return
+      const first = focusable[0]
+      const last = focusable[focusable.length - 1]
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault()
+        last.focus()
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault()
+        first.focus()
+      }
+    }
     document.addEventListener('keydown', onKey)
     const prev = document.body.style.overflow
     document.body.style.overflow = 'hidden'
@@ -146,6 +169,7 @@ export function FloatingChest({ box }) {
       document.removeEventListener('keydown', onKey)
       document.body.style.overflow = prev
       document.body.classList.remove('modal-open')
+      triggerRef.current?.focus()
     }
   }, [open, close])
 
@@ -162,9 +186,9 @@ export function FloatingChest({ box }) {
       </button>
 
       {open && (
-        <div className="modal-backdrop" onClick={close}>
+        <div ref={modalRef} className="modal-backdrop" role="dialog" aria-modal="true" aria-label="Cajita sorpresa" onClick={close}>
           <div className="modal-rays" aria-hidden="true" />
-          <button type="button" className="modal-close" onClick={close} aria-label="Cerrar">
+          <button ref={closeRef} type="button" className="modal-close" onClick={close} aria-label="Cerrar">
             ×
           </button>
 
@@ -186,7 +210,7 @@ export function FloatingChest({ box }) {
               <p className="tap-hint">{stage === 'closed' ? 'Toca el cofre para abrirlo' : '¡Ahí viene!'}</p>
             </div>
           ) : (
-            <div className="reward" role="dialog" aria-modal="true" aria-label="Cajita sorpresa" onClick={(e) => e.stopPropagation()}>
+            <div className="reward" onClick={(e) => e.stopPropagation()}>
               <div className="pennant pennant-title reward-ribbon">
                 <h2>Tu recompensa</h2>
               </div>
