@@ -64,6 +64,7 @@
 /* ===== modal de misterio ===== */
 .modal-backdrop {
   position: fixed; inset: 0; z-index: 60; display: flex; align-items: center; justify-content: center; padding: 16px; overflow: hidden;
+  overscroll-behavior: contain;
   background: radial-gradient(circle at 50% 42%, #6b3a10 0, #2b1407 55%, #120804 100%);
   animation: modal-fade .25s ease-out;
 }
