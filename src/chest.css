@@ -172,7 +172,7 @@
 .reward-price small { font-family: 'Cinzel', serif, 'Bangers'; font-size: .6rem; letter-spacing: 2px; color: #e0b060; }
 .reward-price b { font-family: 'Bangers', cursive; font-weight: 400; font-size: 1.5rem; letter-spacing: 1px; color: #f6ead2; }
 .modal-reveal {
-  padding: 6px 14px; border: 2.5px solid #1a0d05; border-radius: 12px; background: #f6ead2; color: #1a0d05;
+  min-height: 44px; padding: 6px 14px; border: 2.5px solid #1a0d05; border-radius: 12px; background: #f6ead2; color: #1a0d05;
   font-family: 'Bangers', cursive; font-size: 1.1rem; letter-spacing: 1px; box-shadow: 3px 3px 0 #1a0d05; cursor: pointer;
 }
 .modal-reveal:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 #1a0d05; }
