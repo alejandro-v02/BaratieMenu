@@ -165,8 +165,8 @@
   display: flex; align-items: center; justify-content: center; width: 62px; height: 62px; border-radius: 50%;
   border: 3px solid #1a0d05; background: #f6ead2; box-shadow: 2px 2px 0 #1a0d05;
 }
-.mcard-back b { font-family: 'Bangers', cursive; font-weight: 400; font-size: 1.2rem; letter-spacing: 1px; line-height: 1.05; }
-.mcard-back small { font-family: 'Caveat', cursive; font-weight: 700; font-size: 1.05rem; color: #6f4428; line-height: 1; }
+.mcard-back b { font-family: 'Bangers', cursive; font-weight: 400; font-size: 1.2rem; letter-spacing: 1px; line-height: 1.05; overflow-wrap: anywhere; }
+.mcard-back small { font-family: 'Caveat', cursive; font-weight: 700; font-size: 1.05rem; color: #6f4428; line-height: 1; overflow-wrap: anywhere; }
 .reward-footer { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 18px; }
 .reward-price { display: flex; flex-direction: column; align-items: center; padding: 6px 30px 6px 24px; line-height: 1; }
 .reward-price small { font-family: 'Cinzel', serif, 'Bangers'; font-size: .6rem; letter-spacing: 2px; color: #e0b060; }
