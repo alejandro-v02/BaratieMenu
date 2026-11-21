@@ -225,6 +225,7 @@ export function FloatingChest({ box }) {
                     className={`mcard${flipped.includes(i) ? ' flipped' : ''}`}
                     onClick={() => flip(i)}
                     aria-label={flipped.includes(i) ? it.name : 'Carta misteriosa'}
+                    aria-pressed={flipped.includes(i)}
                   >
                     <span className="mcard-inner">
                       <span className="mcard-face mcard-front">
