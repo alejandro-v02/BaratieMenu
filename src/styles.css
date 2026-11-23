@@ -98,6 +98,11 @@
   font-family: 'Bangers', cursive; font-size: 1.2rem; letter-spacing: 1px;
   background: linear-gradient(#5a3416, #2e1508); color: var(--paper); border: 2px solid var(--ink);
   box-shadow: 2px 2px 0 var(--ink); transform: rotate(-3deg);
+  transition: transform .18s ease, filter .18s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .item:hover .price { transform: rotate(0deg) scale(1.04); filter: brightness(1.08); }
 }
 
 .chips-wrap { padding: 12px; background: var(--panel); border: 2.5px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); border-radius: 3px; }
